@@ -91,20 +91,29 @@ export const logout = (req, res) => {
 
 export const deleteUser = async (req, res) => {
   try {
-    const userId = req.user.id
-    if (!userId) return res.status(401).json({ message: 'No autorizado' })
+    const userId = req.user.id;
+    if (!userId) return res.status(401).json({ message: 'No autorizado' });
 
-    const user = await User.findById(userId)
-    if (!user) return res.status(404).json({ message: 'Usuario no encontrado' })
+    let user;
 
-    await User.findByIdAndDelete(userId)
+    // primero buscamos si el usuario tiene googleId
+    user = await User.findOneAndDelete({ googleId: userId })
 
-    res.clearCookie('token', { httpOnly: true, secure: process.env.NODE_ENV === 'production', sameSite: 'None' })
-    res.status(200).json({ message: 'Usuario eliminado correctamente' })
+    // Si no se encuentra por googleId, busca por _id
+    if (!user) {
+      user = await User.findByIdAndDelete(userId);
+    }
+    
+    if (!user) return res.status(404).json({ message: 'Usuario no encontrado' });
+
+    res.clearCookie('token', { httpOnly: true, secure: process.env.NODE_ENV === 'production', sameSite: 'None' });
+
+    res.status(200).json({ message: 'Usuario eliminado correctamente' });
   } catch (error) {
-    res.status(500).json({ message: 'Error al eliminar usuario', error: error.message })
+    res.status(500).json({ message: 'Error al eliminar usuario', error: error.message });
   }
-}
+};
+
 
 
 export const createGuestUser = async (req, res) => {

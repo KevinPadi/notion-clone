@@ -1,10 +1,15 @@
-import mongoose from 'mongoose'
 import dotenv from 'dotenv'
+
+dotenv.config()
+
+import mongoose from 'mongoose'
 import cors from 'cors'
 import express from 'express'
 import authRoutes from './routes/auth_routes.js'
 import cookieParser from 'cookie-parser'
-dotenv.config()
+import passport from 'passport';
+import './config/passportGoogle.js'
+
 
 const app = express()
 
@@ -14,6 +19,7 @@ app.use(cors({
   origin: process.env.CLIENT_URL,
   credentials: true
 }))
+app.use(passport.initialize());
 
 // connect to MongoDB
 const connectDB = async () => {
