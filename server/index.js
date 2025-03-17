@@ -6,6 +6,7 @@ import mongoose from 'mongoose'
 import cors from 'cors'
 import express from 'express'
 import authRoutes from './routes/auth_routes.js'
+import pageRoutes from './routes/page_routes.js'
 import cookieParser from 'cookie-parser'
 import passport from 'passport';
 import './config/passportGoogle.js'
@@ -21,7 +22,7 @@ app.use(cors({
 }))
 app.use(passport.initialize());
 
-// connect to MongoDB
+// conectar a MongoDB
 const connectDB = async () => {
   try {
     await mongoose.connect(process.env.MONGO_URI)
@@ -34,15 +35,19 @@ const connectDB = async () => {
 
 connectDB()
 
-// routes
+// rutas
 
 app.get('/', (req, res) => {
-  res.send('Server running...')
+  res.send('Servidor online...')
 })
 
+// rutas de autenticación
 app.use('/api/auth', authRoutes)
 
-// start the server
+// rutas de las páginas
+app.use('/api/pages', pageRoutes)
+
+// Corre el servidor
 const PORT = process.env.PORT || 3000
 app.listen(PORT, () => {
   console.log(`Server running on http://localhost:${PORT} `)
