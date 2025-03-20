@@ -6,11 +6,33 @@ import {
   SidebarContent,
   SidebarHeader,
   SidebarRail,
+  SidebarFooter
 } from "@/components/ui/sidebar"
+import { NavUser } from "./nav-user"
 
 // This is sample data.
 const data = {
   favorites: [
+    {
+      name: "Project Management & Task Tracking",
+      url: "#",
+      emoji: "📊",
+    },
+    {
+      name: "Project Management & Task Tracking",
+      url: "#",
+      emoji: "📊",
+    },
+    {
+      name: "Project Management & Task Tracking",
+      url: "#",
+      emoji: "📊",
+    },
+    {
+      name: "Project Management & Task Tracking",
+      url: "#",
+      emoji: "📊",
+    },
     {
       name: "Project Management & Task Tracking",
       url: "#",
@@ -71,9 +93,12 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
         <AppLogo />
         <NavMain />
       </SidebarHeader>
-      <SidebarContent>
+      <SidebarContent className="scroll">
         <NavFavorites favorites={data.favorites} />
       </SidebarContent>
+      <SidebarFooter>
+        <NavUser />
+      </SidebarFooter>
       <SidebarRail />
     </Sidebar>
   )
