@@ -1,4 +1,5 @@
 import { Button } from "@/components/ui/button"
+import { Link } from "react-router-dom"
 
 const HomePage = () => {
   return (
@@ -8,9 +9,11 @@ const HomePage = () => {
       </h1>
 
       <div className="flex gap-4">
-        <Button variant={"ghost"}>
-          Iniciar Sesión
-        </Button>
+        <Link to={'/login'}>
+          <Button variant={"ghost"}>
+            Iniciar Sesión
+          </Button>
+        </Link>
         <Button>
           Registrarse
         </Button>
