@@ -6,6 +6,7 @@ import { ToastContainer } from 'react-toastify'
 import { Flip } from 'react-toastify'
 import DashboardPage from './pages/dashboardPage'
 import ProtectedRoute from './components/protected-route'
+import SignUpPage from './pages/SignUpPage'
 
 function App() {
 
@@ -15,7 +16,7 @@ function App() {
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/login" element={<LoginPage />} />
-          {/* <Route path="/signup" element={<SignUpPage />} /> */}
+          <Route path="/register" element={<SignUpPage />} />
             {/* <Route path="/b" element={<ProtectedRoute />} /> */}
 
           {/* Ruta protegida */}
