@@ -7,6 +7,7 @@ import cors from 'cors'
 import express from 'express'
 import authRoutes from './routes/auth_routes.js'
 import pageRoutes from './routes/page_routes.js'
+import protectedRoute from './routes/protected_route.js'
 import cookieParser from 'cookie-parser'
 import passport from 'passport';
 import './config/passportGoogle.js'
@@ -46,6 +47,10 @@ app.use('/api/auth', authRoutes)
 
 // rutas de las páginas
 app.use('/api/pages', pageRoutes)
+
+// ruta protegida
+app.use('/api', protectedRoute) 
+
 
 // Corre el servidor
 const PORT = process.env.PORT || 3000
