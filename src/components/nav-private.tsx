@@ -40,7 +40,7 @@ export function NavPrivate({
 
   return (
     <SidebarGroup className="group-data-[collapsible=icon]:hidden">
-      <SidebarGroupLabel>Pages</SidebarGroupLabel>
+      <SidebarGroupLabel>Páginas</SidebarGroupLabel>
       <SidebarMenu>
         {pages.map((item) => (
           <SidebarMenuItem key={item.name}>
