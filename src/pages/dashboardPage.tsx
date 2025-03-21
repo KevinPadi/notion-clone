@@ -12,6 +12,8 @@ import {
   SidebarProvider,
   SidebarTrigger,
 } from "@/components/ui/sidebar"
+import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
+import DashboardHome from "./dashboardHome"
 
 export default function DashboardPage() {
   return (
@@ -37,8 +39,11 @@ export default function DashboardPage() {
           </div>
         </header>
         <div className="flex flex-1 flex-col gap-4 px-4 py-10">
-          <div className="mx-auto h-24 w-full max-w-3xl rounded-xl bg-muted/50" />
-          <div className="mx-auto h-full w-full max-w-3xl rounded-xl bg-muted/50" />
+          <Routes>
+            <Route path="/" element={<Navigate to="/home" />} />
+            <Route path="/home" element={<DashboardHome />} />
+            {/* <Route path="/page/:id" element={<PageView />} /> */}
+          </Routes>
         </div>
       </SidebarInset>
     </SidebarProvider>

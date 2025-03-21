@@ -5,6 +5,7 @@ import {
 } from "@/components/ui/sidebar"
 import { Input } from "./ui/input"
 import { Home, Search, PlusCircleIcon } from "lucide-react"
+import { Link } from "react-router-dom"
 
 export function NavMain() {
   return (
@@ -29,8 +30,10 @@ export function NavMain() {
 
         <SidebarMenuItem>
           <SidebarMenuButton>
-            <Home />
-            Home
+            <Link to="/dashboard/home" className="flex gap-1.5 items-center">
+              <Home size={18} strokeWidth={1.75} />
+              Home
+            </Link>
           </SidebarMenuButton>
         </SidebarMenuItem>
     </SidebarMenu>
