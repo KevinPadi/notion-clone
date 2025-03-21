@@ -1,12 +1,4 @@
 import {
-  ArrowUpRight,
-  Link,
-  MoreHorizontal,
-  StarOff,
-  Trash2,
-} from "lucide-react"
-
-import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
@@ -22,6 +14,10 @@ import {
   SidebarMenuItem,
   useSidebar,
 } from "@/components/ui/sidebar"
+import { SquarePenIcon, SquarePenIconHandle } from "./icons/square-pen"
+import { DeleteIcon, DeleteIconHandle } from "./icons/delete-icon"
+import { useRef } from "react"
+import { MoreHorizontal, StarOff } from "lucide-react"
 
 export function NavFavorites({
   favorites,
@@ -34,9 +30,12 @@ export function NavFavorites({
 }) {
   const { isMobile } = useSidebar()
 
+  const deleteIconRef = useRef<DeleteIconHandle>(null)
+  const penIconRef = useRef<SquarePenIconHandle>(null)
+
   return (
     <SidebarGroup className="group-data-[collapsible=icon]:hidden">
-      <SidebarGroupLabel>Favorites</SidebarGroupLabel>
+      <SidebarGroupLabel>Favoritos</SidebarGroupLabel>
       <SidebarMenu>
         {favorites.map((item) => (
           <SidebarMenuItem key={item.name}>
@@ -60,21 +59,23 @@ export function NavFavorites({
               >
                 <DropdownMenuItem>
                   <StarOff className="text-muted-foreground" />
-                  <span>Remove from Favorites</span>
+                  <span>Eliminar de favoritos</span>
                 </DropdownMenuItem>
                 <DropdownMenuSeparator />
-                <DropdownMenuItem>
-                  <Link className="text-muted-foreground" />
-                  <span>Copy Link</span>
-                </DropdownMenuItem>
-                <DropdownMenuItem>
-                  <ArrowUpRight className="text-muted-foreground" />
-                  <span>Open in New Tab</span>
+                <DropdownMenuItem
+                  onMouseEnter={() => penIconRef.current?.startAnimation()}
+                  onMouseLeave={() => penIconRef.current?.stopAnimation()}
+                >
+                  <SquarePenIcon ref={penIconRef} className="p-0" />
+                  <span>Editar</span>
                 </DropdownMenuItem>
                 <DropdownMenuSeparator />
-                <DropdownMenuItem>
-                  <Trash2 className="text-muted-foreground" />
-                  <span>Delete</span>
+                <DropdownMenuItem
+                  onMouseEnter={() => deleteIconRef.current?.startAnimation()}
+                  onMouseLeave={() => deleteIconRef.current?.stopAnimation()}
+                >
+                  <DeleteIcon ref={deleteIconRef} className="p-0" />
+                  <span>Borrar</span>
                 </DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
