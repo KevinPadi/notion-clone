@@ -1,13 +1,7 @@
-import {
-  MoreVerticalIcon,
-  UserCircleIcon,
-} from "lucide-react"
+import { MoreVerticalIcon, UserCircleIcon, Moon, Sun, Monitor } from "lucide-react"
+import { useRef } from "react"
 
-import {
-  Avatar,
-  AvatarFallback,
-  AvatarImage,
-} from "@/components/ui/avatar"
+import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar"
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -16,23 +10,17 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu"
-import {
-  SidebarMenu,
-  SidebarMenuButton,
-  SidebarMenuItem,
-  useSidebar,
-} from "@/components/ui/sidebar"
-import { useAuth } from "@/context/auth_context"
+} from "./ui/dropdown-menu"
+import { SidebarMenu, SidebarMenuButton, SidebarMenuItem, useSidebar } from "./ui/sidebar"
+import { useAuth } from "../context/auth_context"
 import { LogoutIcon } from "./icons/logout-icon"
-import { useRef } from "react"
-import { LogoutIconHandle } from "./icons/logout-icon"
+import type { LogoutIconHandle } from "./icons/logout-icon"
+import { useTheme } from "./theme-provider"
 
 export function NavUser() {
   const { isMobile } = useSidebar()
-
+  const { theme, setTheme } = useTheme()
   const { user } = useAuth()
-
   const logoutIconRef = useRef<LogoutIconHandle>(null)
 
   return (
@@ -50,9 +38,7 @@ export function NavUser() {
               </Avatar>
               <div className="grid flex-1 text-left text-sm leading-tight">
                 <span className="truncate font-medium">{user?.name}</span>
-                <span className="truncate text-xs text-muted-foreground">
-                  {user?.email}
-                </span>
+                <span className="truncate text-xs text-muted-foreground">{user?.email}</span>
               </div>
               <MoreVerticalIcon className="ml-auto size-4" />
             </SidebarMenuButton>
@@ -71,26 +57,58 @@ export function NavUser() {
                 </Avatar>
                 <div className="grid flex-1 text-left text-sm leading-tight">
                   <span className="truncate font-medium">{user?.name}</span>
-                  <span className="truncate text-xs text-muted-foreground">
-                    {user?.email}
-                  </span>
+                  <span className="truncate text-xs text-muted-foreground">{user?.email}</span>
                 </div>
               </div>
             </DropdownMenuLabel>
             <DropdownMenuSeparator />
             <DropdownMenuGroup>
               <DropdownMenuItem className="hover:cursor-pointer">
-                <UserCircleIcon />
+                <UserCircleIcon className="size-5" />
                 Cuenta
               </DropdownMenuItem>
+
+              {/* Theme Switcher */}
+              <DropdownMenuItem className="hover:bg-transparent dark:hover:bg-transparent hover:cursor-auto">
+                <div className="flex items-center justify-between w-full">
+                  <span className="text-sm">Tema</span>
+                  <div className="flex items-center gap-1 rounded-full border p-1">
+                    <button
+                      onClick={() => setTheme("system")}
+                      className={`p-1 rounded-full hover:bg-muted ${theme === "system" && 'bg-muted'}`}
+                      title="System"
+                    >
+                      <Monitor className="h-4 w-4" />
+                      <span className="sr-only">Sistema</span>
+                    </button>
+                    <button
+                      onClick={() => setTheme("light")}
+                      className={`p-1 rounded-full hover:bg-muted ${theme === "light" && 'bg-muted'}`}
+                      title="Light"
+                    >
+                      <Sun className="h-4 w-4" />
+                      <span className="sr-only">Claro</span>
+                    </button>
+                    <button
+                      onClick={() => setTheme("dark")}
+                      className={`p-1 rounded-full hover:bg-muted ${theme === "dark" && 'bg-muted'}`}
+                      title="Dark"
+                    >
+                      <Moon className="h-4 w-4" />
+                      <span className="sr-only">Oscuro</span>
+                    </button>
+                  </div>
+                </div>
+              </DropdownMenuItem>
+
             </DropdownMenuGroup>
             <DropdownMenuSeparator />
-            <DropdownMenuItem 
+            <DropdownMenuItem
               className="hover:cursor-pointer"
               onMouseEnter={() => logoutIconRef.current?.startAnimation()}
               onMouseLeave={() => logoutIconRef.current?.stopAnimation()}
             >
-              <LogoutIcon ref={logoutIconRef} className="p-0" />
+              <LogoutIcon ref={logoutIconRef} className="mr-2 p-0" />
               Cerrar sesión
             </DropdownMenuItem>
           </DropdownMenuContent>
@@ -99,3 +117,4 @@ export function NavUser() {
     </SidebarMenu>
   )
 }
+
