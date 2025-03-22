@@ -1,6 +1,5 @@
 import { MoreVerticalIcon, UserCircleIcon, Moon, Sun, Monitor } from "lucide-react"
 import { useRef } from "react"
-
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar"
 import {
   DropdownMenu,
@@ -16,6 +15,7 @@ import { useAuth } from "../context/auth_context"
 import { LogoutIcon } from "./icons/logout-icon"
 import type { LogoutIconHandle } from "./icons/logout-icon"
 import { useTheme } from "./theme-provider"
+import { Link } from "react-router-dom"
 
 export function NavUser() {
   const { isMobile } = useSidebar()
@@ -64,8 +64,10 @@ export function NavUser() {
             <DropdownMenuSeparator />
             <DropdownMenuGroup>
               <DropdownMenuItem className="hover:cursor-pointer">
-                <UserCircleIcon className="size-5" />
-                Cuenta
+                <Link to={'/dashboardapp/account'} className="flex w-full gap-2">
+                  <UserCircleIcon className="size-5" />
+                  Cuenta
+                </Link>
               </DropdownMenuItem>
 
               {/* Theme Switcher */}
