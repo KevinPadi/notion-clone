@@ -164,3 +164,23 @@ export const createGuestUser = async (req, res) => {
     res.status(500).json({ message: 'Error creating guest account', error })
   }
 }
+
+// update user
+export const updateUser = async (req, res) => {
+
+  console.log(req.user.id)
+
+  try {
+    const updatedUser = await User.findOneAndUpdate(
+      { _id: req.user.id },
+      { $set: req.body },
+      { new: true }
+    )
+
+    if (!updatedUser) return res.status(404).json({ message: "Usuario no encontrado." })
+
+    res.json(updatedUser)
+  } catch (error) {
+    res.status(500).json({ message: "Error al actualizar el usuario." })
+  }
+}

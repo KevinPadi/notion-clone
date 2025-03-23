@@ -1,9 +1,10 @@
 import express from 'express'
-import { register, login, logout, deleteUser, createGuestUser } from '../controllers/auth_controller.js'
+import { register, login, logout, deleteUser, createGuestUser, updateUser } from '../controllers/auth_controller.js'
 import { protect } from '../middlewares/auth_middleware.js'
 import passport from 'passport'
 import '../config/passportGoogle.js'
 import jwt from 'jsonwebtoken'
+import { validateEditUser } from '../middlewares/validate_edit_user_middleware.js'
 
 const router = express.Router()
 
@@ -12,8 +13,10 @@ router.post('/login', login)
 router.post('/loginGuest', createGuestUser)
 router.post('/logout', logout)
 router.delete('/delete', protect, deleteUser)
+router.put("/edit-user", protect, validateEditUser, updateUser)
 
-// ruta de autenticación con Google
+
+// ruta de autenticación con Googlse
 router.get('/google', 
   passport.authenticate('google', { session: false, scope: ['profile', 'email'] })
 )
