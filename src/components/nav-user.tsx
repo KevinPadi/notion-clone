@@ -22,7 +22,7 @@ import { UserIcon, UserIconHandle } from "./icons/user-icon"
 export function NavUser() {
   const { isMobile } = useSidebar()
   const { theme, setTheme } = useTheme()
-  const { user } = useAuth()
+  const { user, logout } = useAuth()
 
   const logoutIconRef = useRef<LogoutIconHandle>(null)
   const chevronsIconRef = useRef<ChevronsUpDownIconHandle>(null)
@@ -117,6 +117,7 @@ export function NavUser() {
             </DropdownMenuGroup>
             <DropdownMenuSeparator />
             <DropdownMenuItem
+              onClick={logout}
               className="hover:cursor-pointer"
               onMouseEnter={() => logoutIconRef.current?.startAnimation()}
               onMouseLeave={() => logoutIconRef.current?.stopAnimation()}
