@@ -1,4 +1,4 @@
-import { UserCircleIcon, Moon, Sun, Monitor } from "lucide-react"
+import { Moon, Sun, Monitor } from "lucide-react"
 import { useRef } from "react"
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar"
 import {
@@ -70,12 +70,13 @@ export function NavUser() {
             </DropdownMenuLabel>
             <DropdownMenuSeparator />
             <DropdownMenuGroup>
-              <DropdownMenuItem 
+              <DropdownMenuItem
+                asChild
                 className="hover:cursor-pointer"
                 onMouseEnter={() => userIconRef.current?.startAnimation()}
                 onMouseLeave={() => userIconRef.current?.stopAnimation()}
               >
-                <Link to={'/dashboardapp/account'} className="flex w-full gap-2">
+                <Link to={'/dashboard/account'} className="flex w-full gap-2">
                   <UserIcon ref={userIconRef} className="size-5" />
                   Cuenta
                 </Link>
