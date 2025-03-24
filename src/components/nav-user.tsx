@@ -1,4 +1,4 @@
-import { MoreVerticalIcon, UserCircleIcon, Moon, Sun, Monitor } from "lucide-react"
+import { UserCircleIcon, Moon, Sun, Monitor } from "lucide-react"
 import { useRef } from "react"
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar"
 import {
@@ -16,12 +16,17 @@ import { LogoutIcon } from "./icons/logout-icon"
 import type { LogoutIconHandle } from "./icons/logout-icon"
 import { useTheme } from "./theme-provider"
 import { Link } from "react-router-dom"
+import { ChevronsUpDownIcon, ChevronsUpDownIconHandle } from "./icons/chevrons-up-down"
+import { UserIcon, UserIconHandle } from "./icons/user-icon"
 
 export function NavUser() {
   const { isMobile } = useSidebar()
   const { theme, setTheme } = useTheme()
   const { user } = useAuth()
+
   const logoutIconRef = useRef<LogoutIconHandle>(null)
+  const chevronsIconRef = useRef<ChevronsUpDownIconHandle>(null)
+  const userIconRef = useRef<UserIconHandle>(null)
 
   return (
     <SidebarMenu>
@@ -31,8 +36,10 @@ export function NavUser() {
             <SidebarMenuButton
               size="lg"
               className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground hover:cursor-pointer"
+              onMouseEnter={() => chevronsIconRef.current?.startAnimation()}
+              onMouseLeave={() => chevronsIconRef.current?.stopAnimation()}
             >
-              <Avatar className="h-8 w-8 rounded-lg grayscale">
+              <Avatar className="h-8 w-8 rounded-full border bg-muted">
                 <AvatarImage src={user?.avatar} alt={user?.name} />
                 <AvatarFallback className="rounded-lg">CN</AvatarFallback>
               </Avatar>
@@ -40,7 +47,7 @@ export function NavUser() {
                 <span className="truncate font-medium">{user?.name}</span>
                 <span className="truncate text-xs text-muted-foreground">{user?.email}</span>
               </div>
-              <MoreVerticalIcon className="ml-auto size-4" />
+              <ChevronsUpDownIcon ref={chevronsIconRef} className="size-9"  />
             </SidebarMenuButton>
           </DropdownMenuTrigger>
           <DropdownMenuContent
@@ -51,7 +58,7 @@ export function NavUser() {
           >
             <DropdownMenuLabel className="p-0 font-normal">
               <div className="flex items-center gap-2 px-1 py-1.5 text-left text-sm">
-                <Avatar className="h-8 w-8 rounded-lg">
+                <Avatar className="h-8 w-8 rounded-full border bg-muted">
                   <AvatarImage src={user?.avatar} alt={user?.name} />
                   <AvatarFallback className="rounded-lg">CN</AvatarFallback>
                 </Avatar>
@@ -63,9 +70,13 @@ export function NavUser() {
             </DropdownMenuLabel>
             <DropdownMenuSeparator />
             <DropdownMenuGroup>
-              <DropdownMenuItem className="hover:cursor-pointer">
+              <DropdownMenuItem 
+                className="hover:cursor-pointer"
+                onMouseEnter={() => userIconRef.current?.startAnimation()}
+                onMouseLeave={() => userIconRef.current?.stopAnimation()}
+              >
                 <Link to={'/dashboardapp/account'} className="flex w-full gap-2">
-                  <UserCircleIcon className="size-5" />
+                  <UserIcon ref={userIconRef} className="size-5" />
                   Cuenta
                 </Link>
               </DropdownMenuItem>
@@ -110,7 +121,7 @@ export function NavUser() {
               onMouseEnter={() => logoutIconRef.current?.startAnimation()}
               onMouseLeave={() => logoutIconRef.current?.stopAnimation()}
             >
-              <LogoutIcon ref={logoutIconRef} className="mr-2 p-0" />
+              <LogoutIcon ref={logoutIconRef} className="mr-1 p-0" />
               Cerrar sesión
             </DropdownMenuItem>
           </DropdownMenuContent>
