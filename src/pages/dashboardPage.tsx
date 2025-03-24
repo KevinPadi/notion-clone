@@ -1,28 +1,29 @@
 import { AppSidebar } from "@/components/app-sidebar"
-import { NavActions } from "@/components/nav-actions"
-import {
-  Breadcrumb,
-  BreadcrumbItem,
-  BreadcrumbList,
-  BreadcrumbPage,
-} from "@/components/ui/breadcrumb"
-import { Separator } from "@/components/ui/separator"
+// import { NavActions } from "@/components/nav-actions"
+// import {
+//   Breadcrumb,
+//   BreadcrumbItem,
+//   BreadcrumbList,
+//   BreadcrumbPage,
+// } from "@/components/ui/breadcrumb"
+// import { Separator } from "@/components/ui/separator"
 import {
   SidebarInset,
   SidebarProvider,
   SidebarTrigger,
 } from "@/components/ui/sidebar"
-import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom"
 import DashboardHome from "./dashboardHome"
+import DashboardAccount from "./dashboardAccount"
 
 export default function DashboardPage() {
   return (
     <SidebarProvider>
       <AppSidebar />
       <SidebarInset>
-        <header className="flex h-14 shrink-0 items-center gap-2">
+            <SidebarTrigger className="fixed top-3 ml-2" />
+        {/* <header className="flex h-14 shrink-0 items-center gap-2">
           <div className="flex flex-1 items-center gap-2 px-3">
-            <SidebarTrigger />
             <Separator orientation="vertical" className="mr-2 h-4" />
             <Breadcrumb>
               <BreadcrumbList>
@@ -37,11 +38,12 @@ export default function DashboardPage() {
           <div className="ml-auto px-3">
             <NavActions />
           </div>
-        </header>
+        </header> */}
         <div className="flex flex-1 flex-col gap-4 px-4 py-10">
           <Routes>
             <Route path="/" element={<Navigate to="/home" />} />
             <Route path="/home" element={<DashboardHome />} />
+            <Route path="/account" element={<DashboardAccount />} />
             {/* <Route path="/page/:id" element={<PageView />} /> */}
           </Routes>
         </div>

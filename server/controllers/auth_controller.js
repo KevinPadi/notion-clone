@@ -14,7 +14,7 @@ export const register = async (req, res) => {
     const salt = await bcrypt.genSalt(10)
     const hashedPassword = await bcrypt.hash(password, salt)
 
-    const defaultAvatar = 'https://api.dicebear.com/9.x/notionists/svg?seed=defaultAvatar&body=variant08&gesture[]&gestureProbability=0&glassesProbability=100&hair=hat&lips=variant04'
+    const defaultAvatar = `https://api.dicebear.com/9.x/notionists/svg?seed=${email}&body=variant08&gesture[]&gestureProbability=0&glassesProbability=100&hair=hat&lips=variant04`
 
     const user = await User.create({ name: name, email, password: hashedPassword, avatar: defaultAvatar })
 
@@ -168,8 +168,6 @@ export const createGuestUser = async (req, res) => {
 // update user
 export const updateUser = async (req, res) => {
 
-  console.log(req.user.id)
-
   try {
     const updatedUser = await User.findOneAndUpdate(
       { _id: req.user.id },
@@ -178,6 +176,30 @@ export const updateUser = async (req, res) => {
     )
 
     if (!updatedUser) return res.status(404).json({ message: "Usuario no encontrado." })
+    
+    res.clearCookie('token', {
+      httpOnly: true,
+      secure:  process.env.NODE_ENV === 'production',
+      maxAge: 1000 * 60 * 60 * 24 * 7,
+      sameSite: process.env.NODE_ENV === 'production' ? 'None' : 'lax'
+    })
+
+    const token = jwt.sign(
+      { 
+        id: updatedUser._id, 
+        name: updatedUser.name, 
+        email: updatedUser.email,
+        avatar: updatedUser.avatar
+      }, 
+      process.env.JWT_SECRET, 
+      { expiresIn: '7d' }
+    )
+
+    res.cookie('token', token, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === 'production',
+      sameSite: process.env.NODE_ENV === 'production' ? 'None' : 'lax'
+    })
 
     res.json(updatedUser)
   } catch (error) {

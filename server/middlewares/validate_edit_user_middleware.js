@@ -2,20 +2,13 @@ import { z } from "zod"
 
 export const validateEditUser = (req, res, next) => {
   try {
-    const { oauth } = req.user
     let schema = z.object({
       name: z.string()
         .min(1, 'El nombre es obligatorio')
         .max(64, 'El nombre no puede tener más de 64 caracteres')
         .optional(),
+      avatar: z.string().url('Por favor usa una URL válida').optional()
     });
-
-    // Si el usuario NO se logueó con Google, permitir modificar el avatar
-    if (!oauth) {
-      schema = schema.extend({
-        avatar: z.string().url('Por favor usa una URL válida').optional(),
-      });
-    }
 
     req.body = schema.parse(req.body);
     next();
