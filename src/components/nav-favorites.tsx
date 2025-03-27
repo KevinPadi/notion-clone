@@ -1,86 +1,39 @@
 import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu"
-import {
   SidebarGroup,
   SidebarGroupLabel,
   SidebarMenu,
-  SidebarMenuAction,
   SidebarMenuButton,
   SidebarMenuItem,
-  useSidebar,
 } from "@/components/ui/sidebar"
-import { SquarePenIcon, SquarePenIconHandle } from "./icons/square-pen"
-import { DeleteIcon, DeleteIconHandle } from "./icons/delete-icon"
-import { useRef } from "react"
-import { MoreHorizontal, StarOff } from "lucide-react"
+import { FileText } from "lucide-react"
+import { usePagesContext } from "@/context/pages_context"
+import NavItemDropdown from "./nav-item-dropdown"
 
-export function NavFavorites({
-  favorites,
-}: {
-  favorites: {
-    name: string
-    url: string
-    emoji: string
-  }[]
-}) {
-  const { isMobile } = useSidebar()
-
-  const deleteIconRef = useRef<DeleteIconHandle>(null)
-  const penIconRef = useRef<SquarePenIconHandle>(null)
+export function NavFavorites() {
+  const { pages } = usePagesContext()
+  const favoritePages = pages.filter(item => item.favorite === true)
+  console.log(favoritePages.length)
 
   return (
-    <SidebarGroup className="group-data-[collapsible=icon]:hidden">
+    <SidebarGroup className={`group-data-[collapsible=icon]:hidden ${favoritePages.length === 0 ? 'hidden' : 'block'}`}>
       <SidebarGroupLabel>Favoritos</SidebarGroupLabel>
       <SidebarMenu>
-        {favorites.map((item) => (
-          <SidebarMenuItem key={item.name}>
+        {pages?.filter(item => item.favorite === true).map((item) => (
+          <SidebarMenuItem key={item._id}>
             <SidebarMenuButton asChild>
-              <a href={item.url} title={item.name}>
-                <span>{item.emoji}</span>
+              <a href={'#'} title={item.name}>
+                <span>
+                  {
+                    item.icon !== 'none' ? item.icon : <FileText className="text-muted-foreground stroke-[1.5] size-5"/>
+                  }
+                </span>
                 <span>{item.name}</span>
               </a>
             </SidebarMenuButton>
-            <DropdownMenu>
-              <DropdownMenuTrigger asChild>
-                <SidebarMenuAction showOnHover>
-                  <MoreHorizontal />
-                  <span className="sr-only">More</span>
-                </SidebarMenuAction>
-              </DropdownMenuTrigger>
-              <DropdownMenuContent
-                className="w-56 rounded-lg"
-                side={isMobile ? "bottom" : "right"}
-                align={isMobile ? "end" : "start"}
-              >
-                <DropdownMenuItem>
-                  <StarOff className="text-muted-foreground" />
-                  <span>Eliminar de favoritos</span>
-                </DropdownMenuItem>
-                <DropdownMenuSeparator />
-                <DropdownMenuItem
-                  onMouseEnter={() => penIconRef.current?.startAnimation()}
-                  onMouseLeave={() => penIconRef.current?.stopAnimation()}
-                >
-                  <SquarePenIcon ref={penIconRef} className="p-0" />
-                  <span>Editar</span>
-                </DropdownMenuItem>
-                <DropdownMenuSeparator />
-                <DropdownMenuItem
-                  onMouseEnter={() => deleteIconRef.current?.startAnimation()}
-                  onMouseLeave={() => deleteIconRef.current?.stopAnimation()}
-                >
-                  <DeleteIcon ref={deleteIconRef} className="p-0" />
-                  <span>Borrar</span>
-                </DropdownMenuItem>
-              </DropdownMenuContent>
-            </DropdownMenu>
+            <NavItemDropdown favorite={item.favorite} pageId={item._id} name={item.name} />
           </SidebarMenuItem>
         ))}
+        
       </SidebarMenu>
     </SidebarGroup>
   )

@@ -12,10 +12,12 @@ export const createPage = async (req, res) => {
   }
 }
 
-// Obtener todas las páginas del usuario
 export const getPages = async (req, res) => {
   try {
-    const pages = await Page.find({ userId: req.user.id }).sort({ updatedAt: -1 })
+    const pages = await Page.find({ userId: req.user.id })
+      .sort({ updatedAt: -1 })
+      .select('-content') // se excluye la propiedad 'content' para que la carga no sea tan pesada
+
     res.json(pages)
   } catch (error) {
     res.status(500).json({ message: "Error al obtener las páginas." })

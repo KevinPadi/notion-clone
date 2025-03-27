@@ -16,6 +16,6 @@ router.post("/create", validateCreatePage, createPage)
 router.get("/getAll", getPages)
 router.get("/:id", getPageById)
 router.put("/edit/:id", validateEditPage, updatePage)
-router.delete("delete/:id", deletePage)
+router.delete("/delete/:id", deletePage)
 
 export default router
