@@ -1,6 +1,7 @@
 import { createContext, useContext, useState, useEffect } from "react"
 import axios from "axios"
 import { toast } from "react-toastify"
+import { useNavigate } from "react-router-dom"
 
 // TODO: / navegar hacia la página al crearla / 
 
@@ -15,7 +16,9 @@ export interface Page {
 
 interface PagesContextType {
   pages: Page[]
+  loadingPage: boolean,
   getPages: () => Promise<void>
+  getPageById: (pageId: string) => Promise<void>
   createPage: (pageName: string) => Promise<void>
   deletePage: (pageId: string) => Promise<void>
   updatePage: (pageId: string, updatedData: Partial<Page>) => Promise<void>
@@ -32,26 +35,40 @@ export const usePagesContext = () => {
 
 export const PageProvider = ({ children }: { children: React.ReactNode }) => {
   const [pages, setPages] = useState<Page[]>([])
+  const [ loadingPage, setLoadingPage ] = useState(false)
   const BACKEND_URL = import.meta.env.VITE_BACKEND_URL
+  const navigate = useNavigate()
 
   // 🟢GET: Obtener todas las páginas
   const getPages = async () => {
     try {
       const { data } = await axios.get(`${BACKEND_URL}/api/pages/getAll`, { withCredentials: true })
-      console.log(data)
       setPages(data)
     } catch (error) {
       console.error("Hubo un error al obtener las páginas:", error)
     }
   }
 
+  // 🟢GET: Obtener página por ID
+  const getPageById = async (pageId: string) => {
+    setLoadingPage(true)
+    try {
+      const { data } = await axios.get(`${BACKEND_URL}/api/pages/${pageId}`, { withCredentials: true } )
+      setPages((prev) => prev.map((page) => (page._id === pageId ? data : page)))
+    } catch (error) {
+      toast.error("Error al cargar la página",)
+      console.error("Hubo un error al obtener las páginas:", error)
+      navigate('/dashboard/home')
+    } finally {
+      setLoadingPage(false)
+    }
+  }
+
   // 🟠POST: Crear una nueva página
   const createPage = async (name: string) => {
-    console.log(name)
     try {
       const { data } = await axios.post(`${BACKEND_URL}/api/pages/create`, {name: name}, { withCredentials: true })
       setPages((prev) => [...prev, data])
-      console.log(data)
     } catch (error) {
       console.error("Error creating page:", error)
     }
@@ -100,7 +117,7 @@ export const PageProvider = ({ children }: { children: React.ReactNode }) => {
   }, [])
 
   return (
-    <PagesContext.Provider value={{ pages, getPages, createPage, deletePage, updatePage }}>
+    <PagesContext.Provider value={{ pages, loadingPage, getPages, getPageById, createPage, deletePage, updatePage }}>
       {children}
     </PagesContext.Provider>
   )

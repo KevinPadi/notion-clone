@@ -124,3 +124,183 @@
 .scroll {
   scrollbar-width: thin
 }
+
+/* Estilos de TipTap */
+
+/* Estilos base */
+.tiptap {
+  max-width: 700px;
+  margin: auto;
+  font-family: 'Inter', sans-serif;
+  font-size: 16px;
+  line-height: 1.6;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+  border: 1px solid red
+}
+
+/* Estilo para párrafos */
+.tiptap p {
+  margin-bottom: 10px
+}
+
+/* Encabezados */
+.tiptap h1 {
+  font-size: 32px;
+  font-weight: 700;
+  margin: 20px 0;
+}
+
+.tiptap h2 {
+  font-size: 26px;
+  font-weight: 600;
+  margin: 16px 0;
+}
+
+.tiptap h3 {
+  font-size: 22px;
+  font-weight: 600;
+  margin: 14px 0;
+}
+
+/* Listas */
+.tiptap ul,
+.tiptap ol {
+  padding-left: 20px;
+}
+
+.tiptap ul li {
+  list-style-type: disc;
+}
+
+.tiptap ol li {
+  list-style-type: decimal;
+}
+
+/* Bloques de código */
+.tiptap pre {
+  background: #f5f5f5;
+  padding: 10px;
+  border-radius: 6px;
+  overflow-x: auto;
+  font-family: 'Courier New', monospace;
+  font-size: 14px;
+}
+
+.dark .tiptap pre {
+  background: oklch(0.269 0 0);
+
+}
+
+/* Bloques de citas */
+.tiptap blockquote {
+  border-left: 4px solid oklch(0.765 0.177 163.223);
+  padding-left: 12px;
+  font-style: italic;
+  color: #666;
+}
+
+.dark .tiptap blockquote {
+  color: #dddcdc;
+}
+
+/* Negrita y cursiva */
+.tiptap strong {
+  font-weight: 600;
+}
+
+.tiptap em {
+  font-style: italic;
+}
+
+/* Enlaces */
+.tiptap a {
+  color: #0070f3;
+  text-decoration: none;
+  border-bottom: 1px solid #0070f3;
+}
+
+.tiptap a:hover {
+  text-decoration: underline;
+}
+
+/* Checkbox (To-do List) */
+.tiptap ul[data-type="taskList"] {
+  padding-left: 0;
+}
+
+.tiptap ul[data-type="taskList"] li {
+  list-style: none;
+  display: flex;
+  align-items: center;
+}
+
+.tiptap ul[data-type="taskList"] li input[type="checkbox"] {
+  margin-right: 10px;
+}
+
+/* Separadores */
+.tiptap hr {
+  border: none;
+  border-top: 1px solid oklch(0.765 0.177 163.223);
+  margin: 20px 0;
+}
+
+/* Bubble menu */
+.bubble-menu .tiptap {
+  background-color: var(--white);
+  border: 1px solid var(--gray-1);
+  border-radius: 0.7rem;
+  box-shadow: var(--shadow);
+  display: flex;
+  padding: 0.2rem;
+
+  button {
+    background-color: unset;
+
+    &:hover {
+      background-color: var(--gray-3);
+    }
+
+    &.is-active {
+      background-color: var(--purple);
+
+      &:hover {
+        background-color: var(--purple-contrast);
+      }
+    }
+  }
+}
+
+/* Estilos para el mark Highlighter */
+
+mark {
+  background-color: oklch(0.845 0.143 164.978);
+  border-radius: 0.4rem;
+  box-decoration-break: clone;
+  padding: 0.1rem 0.3rem;
+}
+
+.dark mark {
+  background-color: oklch(0.378 0.077 168.94);
+  color: white
+}
+
+/* Estilos para las imágenes */
+
+.tiptap {
+  :first-child {
+    margin-top: 0;
+  }
+
+  img {
+    display: block;
+    height: auto;
+    width: 100%;
+    margin: 1.5rem 0;
+    max-width: 100%;
+
+    &.ProseMirror-selectednode {
+      outline: 3px solid var(--purple);
+    }
+  }
+}

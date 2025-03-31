@@ -34,14 +34,6 @@ export function LoginForm({ className, ...props }: React.ComponentProps<"div">) 
     resolver: zodResolver(authSchema.omit({ name: true })),
   })
 
-  useEffect(() => {
-    console.log(isSubmitting)
-  }, [isSubmitting])
-
-  // const onSubmit = (data: Omit<AuthSchema, 'name'>) => {
-  //   login(data)
-  // }
-
   const onSubmit = async (data: Omit<AuthSchema, 'name'>) => {
     await login(data)
   }

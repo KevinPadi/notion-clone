@@ -12,7 +12,6 @@ import NavItemDropdown from "./nav-item-dropdown"
 export function NavFavorites() {
   const { pages } = usePagesContext()
   const favoritePages = pages.filter(item => item.favorite === true)
-  console.log(favoritePages.length)
 
   return (
     <SidebarGroup className={`group-data-[collapsible=icon]:hidden ${favoritePages.length === 0 ? 'hidden' : 'block'}`}>

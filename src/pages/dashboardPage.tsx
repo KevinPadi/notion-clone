@@ -15,6 +15,7 @@ import {
 import { Routes, Route, Navigate } from "react-router-dom"
 import DashboardHome from "./dashboardHome"
 import DashboardAccount from "./dashboardAccount"
+import EditorPage from "./editorPage"
 
 export default function DashboardPage() {
   return (
@@ -44,7 +45,7 @@ export default function DashboardPage() {
             <Route path="/" element={<Navigate to="/home" />} />
             <Route path="/home" element={<DashboardHome />} />
             <Route path="/account" element={<DashboardAccount />} />
-            {/* <Route path="/page/:id" element={<PageView />} /> */}
+            <Route path="/:name/:id" element={<EditorPage />} />
           </Routes>
         </div>
       </SidebarInset>
