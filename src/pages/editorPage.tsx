@@ -7,6 +7,7 @@ import { usePagesContext } from "@/context/pages_context"
 import { useEffect } from "react"
 import { useParams } from "react-router-dom"
 import EmojiPickerPopover from "@/components/emoji-picker"
+import ImagePicker from "@/components/image-picker"
 
 const EditorPage = () => {
   const { name, id } = useParams()
@@ -75,17 +76,18 @@ const EditorPage = () => {
                   }
                     <div className="gap-2 sm:gap-4 absolute right-6 top-6 flex">
                       <EmojiPickerPopover trigger={<Button variant="secondary" size="sm">Cambiar emoji</Button>} pageId={id} />
-                      <Button variant={'secondary'} size={'sm'}>
+                      {/* <Button variant={'secondary'} size={'sm'}>
                         Agregar portada
-                      </Button>
+                      </Button> */}
+                      <ImagePicker pageId={id} />
                     </div>
-                    <div className="flex items-center gap-2 absolute text-3xl sm:text-4xl font-medium bottom-8 left-4 sm:bottom-12 sm:left-10">
+                    <div className="flex items-center gap-2 absolute text-3xl sm:text-4xl font-medium bottom-8 left-4 sm:bottom-6 sm:left-10 bg-muted/40 rounded-xl p-1">
                       <span className="">
                         {
                           page?.icon !== 'none' && (
                             <EmojiPickerPopover 
                               trigger={
-                                <Button variant={'ghost'} size={"lg"} className="size-14 text-4xl">
+                                <Button variant={'ghost'} size={"lg"} className="size-14 text-4xl rounded-full">
                                   {page?.icon}
                                 </Button>
                               } 
