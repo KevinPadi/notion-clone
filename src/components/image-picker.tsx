@@ -8,7 +8,7 @@ import { useState } from "react"
 import { Button } from "./ui/button"
 import { Input } from "./ui/input"
 import { usePagesContext } from "@/context/pages_context"
-import { Link, Loader, Loader2, Search } from "lucide-react"
+import { Link, Loader2, Search } from "lucide-react"
 import axios from "axios"
 
 type ImagePickerPropTypes = {
@@ -67,8 +67,8 @@ const ImagePicker = ( {pageId}: ImagePickerPropTypes) => {
         </Button>
       </PopoverTrigger>
       <PopoverContent className="w-md max-w-md max-h-80 overflow-y-auto">
-        <Tabs defaultValue="link">
-          <TabsList className="w-full mb-2">
+        <Tabs defaultValue="link" className="relative">
+          <TabsList className="w-fit mb-2">
             <TabsTrigger value="link" className="hover:cursor-pointer">
               <Link />
               Link
@@ -78,6 +78,9 @@ const ImagePicker = ( {pageId}: ImagePickerPropTypes) => {
               Unsplash
             </TabsTrigger>
           </TabsList>
+          <Button onClick={() => handleUpdatePage('none')} variant={"secondary"} size={"sm"} className="border w-fit absolute right-0 top-0 text-xs">
+            Remover
+          </Button>
           <TabsContent value="link" className="space-y-4">
             <Input value={linkValue} onChange={(e) => setLinkValue(e.target.value)} type="text" placeholder="Ingresa la URL de tu imágen" />
             <Button onClick={() => handleUpdatePage(linkValue)} variant={'default'} className="w-full">
