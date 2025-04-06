@@ -13,7 +13,7 @@ const EditorPage = () => {
   const { name, id } = useParams()
   const { getPageById, loadingPage, pages } = usePagesContext()
   
-  const page = pages.find(item => item._id === id) ?? { _id: "", name: "Página no encontrada", content: "", icon: "none", cover: "none", favorite: false };
+  const page = pages.find(item => item._id === id) ?? { _id: "", name: "Página no encontrada", content: "", icon: "none", cover: "none", favorite: false, updatedAt: "" };
   
   useEffect(() => {
     if (!id) return
