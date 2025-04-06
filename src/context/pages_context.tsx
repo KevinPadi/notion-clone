@@ -2,14 +2,14 @@ import { createContext, useContext, useState, useEffect } from "react"
 import axios from "axios"
 import { toast } from "react-toastify"
 import { useNavigate } from "react-router-dom"
-
+import type { JSONContent } from "@tiptap/react"
 // TODO: / navegar hacia la página al crearla / 
 
 export interface Page {
   _id: string
   name: string
   icon: string
-  content: string
+  content: JSONContent
   favorite: boolean
   cover: string
   updatedAt: string

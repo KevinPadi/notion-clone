@@ -1,5 +1,4 @@
-// src/Tiptap.tsx
-import { useEditor, EditorContent, FloatingMenu, BubbleMenu } from '@tiptap/react'
+import { useEditor, EditorContent, FloatingMenu, BubbleMenu, JSONContent } from '@tiptap/react'
 import StarterKit from '@tiptap/starter-kit'
 import Highlight from '@tiptap/extension-highlight'
 import TextAlign from '@tiptap/extension-text-align'
@@ -14,9 +13,10 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip"
-import { Page } from '@/context/pages_context'
+import { Page, usePagesContext } from '@/context/pages_context'
+import { useState } from 'react'
+import useDebounce from '@/hooks/useDebounce'
 
-// define your extension array
 const extensions = [
   StarterKit,
   Highlight, 
@@ -30,39 +30,55 @@ const extensions = [
     }),
 ]
 
-
 const TiptapEditor = ({ page }: { page: Page }) => {
-  const content = {
+
+  const [editorState, setEditorState] = useState<JSONContent>(page.content || {
     "type": "doc",
     "content": [
-      {
-        "type": "paragraph",
-        "content": [
-          {
-            "type": "text",
-            "text": "Esto es parrafo con texto"
-          }
-        ]
-      }
+        {
+            "type": "heading",
+            "attrs": {
+                "textAlign": null,
+                "level": 1
+            },
+            "content": [
+                {
+                    "type": "text",
+                    "text": "Esto es un heading"
+                }
+            ]
+        }
     ]
-  }
+})
+  const { updatePage } = usePagesContext()
+
+  
+  const debouncedSavedContent = useDebounce((updatedContent: JSONContent) => {
+    updatePage(page._id, { content: updatedContent })
+    console.log(updatedContent)
+  }, 1000)
 
   const editor = useEditor({
     extensions,
-    content,
+    content: editorState, 
     autofocus: true,
     editorProps: {
       attributes: {
         class: 'prose prose-sm sm:prose-base lg:prose-lg xl:prose-2xl m-5 focus:outline-none',
       }
+    },
+    onUpdate: ({ editor }) => {
+      const updatedContent = editor.getJSON()
+      debouncedSavedContent(editor.getJSON())
+      console.log(updatedContent)
+      setEditorState(updatedContent)
     }
   })
   
   return (
     <>
       <EditorContent editor={editor} />
-      <FloatingMenu className="space-x-2 bg-muted w-3xl border p-1 rounded-lg shadow-lg" tippyOptions={{ duration: 100 }} editor={editor}>
-        
+      <FloatingMenu className="space-x-2 bg-muted w-3xl border p-1 rounded-lg shadow-lg" tippyOptions={{ duration: 100 }} editor={editor}>  
         <TooltipProvider>
           <Tooltip>
             <TooltipTrigger asChild>
