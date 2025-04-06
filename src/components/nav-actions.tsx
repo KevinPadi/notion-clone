@@ -1,106 +1,61 @@
-"use client"
-
-import * as React from "react"
 import {
-  ArrowDown,
-  ArrowUp,
-  Bell,
-  Copy,
-  CornerUpLeft,
-  CornerUpRight,
-  FileText,
-  GalleryVerticalEnd,
-  LineChart,
-  Link,
-  MoreHorizontal,
-  Settings2,
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip"
+import {
   Star,
-  Trash,
-  Trash2,
+  StarOff,
 } from "lucide-react"
-
 import { Button } from "@/components/ui/button"
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from "@/components/ui/popover"
-import {
-  Sidebar,
-  SidebarContent,
-  SidebarGroup,
-  SidebarGroupContent,
-  SidebarMenu,
-  SidebarMenuButton,
-  SidebarMenuItem,
-} from "@/components/ui/sidebar"
+import { Page, usePagesContext } from "@/context/pages_context"
+import dayjs from 'dayjs'
+import relativeTime from 'dayjs/plugin/relativeTime'
+import 'dayjs/locale/es'
+import { ShortcutsDialog } from "./shortcuts-dialog"
 
-const data = [
-  [
-    {
-      label: "Move to Trash",
-      icon: Trash2,
-    },
-  ],
-  [
-    {
-      label: "Undo",
-      icon: CornerUpLeft,
-    },
-  ],
-  [
-    {
-      label: "Export",
-      icon: ArrowDown,
-    },
-  ],
-]
+type NavActionsPropsType = {
+  page: Page
+}
 
-export function NavActions() {
 
+export function NavActions({ page }: NavActionsPropsType) {
+  dayjs.extend(relativeTime) 
+  dayjs.locale('es')
+
+  const { updatePage } = usePagesContext()
+  const lastUpdated = dayjs(page.updatedAt)
+  
   return (
     <div className="flex items-center gap-2 text-sm">
       <div className="text-muted-foreground hidden font-medium md:inline-block">
-        Edit Oct 08
+        {lastUpdated.fromNow()}
       </div>
-      <Button variant="ghost" size="icon" className="h-7 w-7">
-        <Star />
-      </Button>
-      <Popover>
-        <PopoverTrigger asChild>
-          <Button
-            variant="ghost"
-            size="icon"
-            className="data-[state=open]:bg-accent h-7 w-7"
-          >
-            <MoreHorizontal />
+      <TooltipProvider>
+      <Tooltip>
+        <TooltipTrigger asChild>
+          <Button onClick={() => updatePage(page._id, { favorite: !page.favorite})} variant="ghost" size="icon" className="h-7 w-7">
+            {
+              page.favorite ? (
+                <StarOff />
+              ) : (
+                <Star />
+              )
+            }
           </Button>
-        </PopoverTrigger>
-        <PopoverContent
-          className="w-56 overflow-hidden rounded-lg p-0"
-          align="end"
-        >
-          <Sidebar collapsible="none" className="bg-transparent">
-            <SidebarContent>
-              {data.map((group, index) => (
-                <SidebarGroup key={index} className="border-b last:border-none">
-                  <SidebarGroupContent className="gap-0">
-                    <SidebarMenu>
-                      {group.map((item, index) => (
-                        <SidebarMenuItem key={index}>
-                          <SidebarMenuButton>
-                            <item.icon /> <span>{item.label}</span>
-                          </SidebarMenuButton>
-                        </SidebarMenuItem>
-                      ))}
-                    </SidebarMenu>
-                  </SidebarGroupContent>
-                </SidebarGroup>
-              ))}
-            </SidebarContent>
-          </Sidebar>
-        </PopoverContent>
-      </Popover>
+        </TooltipTrigger>
+        <TooltipContent>
+          <p>
+            {
+              page.favorite ? "Eliminar de favoritos" : "Agregar a favoritos"
+            }
+          </p>
+        </TooltipContent>
+      </Tooltip>
+    </TooltipProvider>
+
+    <ShortcutsDialog />
     </div>
   )
 }

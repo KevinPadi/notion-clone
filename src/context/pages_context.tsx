@@ -12,6 +12,7 @@ export interface Page {
   content: string
   favorite: boolean
   cover: string
+  updatedAt: string
 }
 
 interface PagesContextType {

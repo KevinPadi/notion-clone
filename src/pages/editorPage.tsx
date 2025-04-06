@@ -43,7 +43,7 @@ const EditorPage = () => {
             </Breadcrumb>
           </div>
           <div className="ml-auto px-3">
-            <NavActions />
+            <NavActions page={page} />
           </div>
         </header>
         {
