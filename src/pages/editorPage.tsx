@@ -8,6 +8,7 @@ import { useEffect } from "react"
 import { useParams } from "react-router-dom"
 import EmojiPickerPopover from "@/components/emoji-picker"
 import ImagePicker from "@/components/image-picker"
+import { Smile } from "lucide-react"
 
 const EditorPage = () => {
   const { name, id } = useParams()
@@ -74,8 +75,14 @@ const EditorPage = () => {
                       <img src={page?.cover} alt="Cover image" className="size-full object-cover object-center rounded-2xl" />
                     )
                   }
-                    <div className="gap-2 sm:gap-4 absolute right-6 top-6 flex">
-                      <EmojiPickerPopover trigger={<Button className={`opacity-50 hover:opacity-100`} variant="secondary" size="sm">Cambiar emoji</Button>} pageId={id} />
+                    <div className="gap-2 absolute right-6 top-6 flex">
+                      <EmojiPickerPopover 
+                        trigger={ 
+                          <Button className={`opacity-50 hover:opacity-100`} variant="secondary" size="sm">
+                            <Smile />
+                          </Button>
+                        } 
+                        pageId={id} />
                       <ImagePicker pageId={id} />
                     </div>
                     <div className="flex items-center gap-2 absolute text-3xl sm:text-4xl font-medium bottom-8 left-4 sm:bottom-6 sm:left-10 bg-muted/40 rounded-xl p-1">

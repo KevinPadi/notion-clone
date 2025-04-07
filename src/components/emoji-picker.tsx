@@ -43,7 +43,7 @@ export default function EmojiPickerPopover ({ pageId, trigger }: EmojiPickerPopo
         <div className="w-full h-10 bg-transparent">
           <Button onClick={() => handleUpdateEmoji('none')} variant={"ghost"} className="text-sm size-full rounded-none" size={"sm"}>
             <Trash2 className="size-4" />
-            Eliminar icono actual
+            Eliminar
           </Button>
         </div>
       </PopoverContent>

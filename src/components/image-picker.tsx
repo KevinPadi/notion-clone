@@ -8,7 +8,7 @@ import { useState } from "react"
 import { Button } from "./ui/button"
 import { Input } from "./ui/input"
 import { usePagesContext } from "@/context/pages_context"
-import { Link, Loader2, Search } from "lucide-react"
+import { Image, Link, Loader2, Search } from "lucide-react"
 import axios from "axios"
 
 type ImagePickerPropTypes = {
@@ -63,7 +63,7 @@ const ImagePicker = ( {pageId}: ImagePickerPropTypes) => {
     <Popover onOpenChange={setIsOpen} open={isOpen}>
       <PopoverTrigger>
         <Button variant={"secondary"} size={"sm"} className={`opacity-50 hover:opacity-100 ${isOpen && 'opacity-100 hover:opacity-100'}`}>
-          Cambiar portada
+          <Image />
         </Button>
       </PopoverTrigger>
       <PopoverContent className="w-md max-w-md max-h-80 overflow-y-auto">
@@ -79,7 +79,7 @@ const ImagePicker = ( {pageId}: ImagePickerPropTypes) => {
             </TabsTrigger>
           </TabsList>
           <Button onClick={() => handleUpdatePage('none')} variant={"secondary"} size={"sm"} className="border w-fit absolute right-0 top-0 text-xs">
-            Remover
+            Eliminar
           </Button>
           <TabsContent value="link" className="space-y-4">
             <Input value={linkValue} onChange={(e) => setLinkValue(e.target.value)} type="text" placeholder="Ingresa la URL de tu imágen" />
