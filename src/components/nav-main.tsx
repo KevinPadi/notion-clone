@@ -38,9 +38,9 @@ export function NavMain() {
           {isCreating ? (
             <motion.div
               key="input"
-              initial={{ opacity: 0, y: -10 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -10 }}
+              initial={{ opacity: 0, y: 1 }}
+              animate={{ opacity: 1, y: 1 }}
+              exit={{ opacity: 0, y: 0 }}
               transition={{ duration: 0.2 }}
               className="flex items-center gap-2 w-full h-9"
             >
@@ -62,9 +62,9 @@ export function NavMain() {
           ) : (
             <motion.div
               key="button"
-              initial={{ opacity: 0, y: -10 }}
+              initial={{ opacity: 0, y: 1 }}
               animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -10 }}
+              exit={{ opacity: 0, y: 1 }}
               transition={{ duration: 0.2 }}
             >
               <SidebarMenuButton
