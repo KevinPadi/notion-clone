@@ -4,7 +4,7 @@ import {
   SidebarMenuItem,
 } from "@/components/ui/sidebar"
 import { Input } from "./ui/input"
-import { Link } from "react-router-dom"
+import { Link, useLocation } from "react-router-dom"
 import { SquarePenIcon, SquarePenIconHandle } from "./icons/square-pen"
 import { useRef, useState } from "react"
 import { SearchIcon, SearchIconHandle } from "./icons/search-icon"
@@ -18,6 +18,7 @@ export function NavMain() {
   const [isCreating, setIsCreating] = useState(false)
   const [pageName, setPageName] = useState("")
   const { createPage } = usePagesContext()
+  const location = useLocation()
 
   const squarePenIconRef = useRef<SquarePenIconHandle>(null)
   const searchIconRef = useRef<SearchIconHandle>(null)
@@ -104,7 +105,8 @@ export function NavMain() {
           <SidebarMenuButton asChild>
             <Link 
               to="/dashboard/home" 
-              className="flex gap-1.5 items-center"
+              className={`flex gap-1.5 items-center text-muted-foreground ${location.pathname === '/dashboard/home' && 'bg-muted text-primary'}`}
+              // className="flex gap-1.5 items-center"
               onMouseEnter={() => homeIconRef.current?.startAnimation()}
               onMouseLeave={() => homeIconRef.current?.stopAnimation()}
             >

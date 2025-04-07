@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button"
 import { Separator } from "@/components/ui/separator"
 import { usePagesContext } from "@/context/pages_context"
 import { useEffect } from "react"
-import { useParams } from "react-router-dom"
+import { useLocation, useParams } from "react-router-dom"
 import EmojiPickerPopover from "@/components/emoji-picker"
 import ImagePicker from "@/components/image-picker"
 import { Smile } from "lucide-react"
@@ -13,13 +13,15 @@ import { Smile } from "lucide-react"
 const EditorPage = () => {
   const { name, id } = useParams()
   const { getPageById, loadingPage, pages } = usePagesContext()
+  const location = useLocation()
   
   const page = pages.find(item => item._id === id) ?? { _id: "", name: "Página no encontrada", content: {}, icon: "none", cover: "none", favorite: false, updatedAt: "" };
   
   useEffect(() => {
     if (!id) return
+    console.log('hizo el fetch al id:', id)
     getPageById(id)
-  }, [])
+  }, [location])
   
   if(!id) return
 

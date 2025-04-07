@@ -1,7 +1,6 @@
 import CardPage from "@/components/card-page"
 import { useAuth } from "@/context/auth_context"
 import { usePagesContext } from "@/context/pages_context"
-import { FileText } from "lucide-react"
 import { useEffect, useState } from "react"
 
 const DashboardHome = () => {

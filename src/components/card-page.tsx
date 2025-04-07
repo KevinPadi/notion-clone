@@ -7,10 +7,12 @@ type CardPagePropsType = {
 }
 
 const CardPage = ({item}: CardPagePropsType) => {
+  const formattedRoute = item.name.toLowerCase().replace(/\s+/g, '-')
+
   return (
     <li key={item._id} className="w-full max-w-80 group hover:cursor-pointer">
       <article className="w-full border border-transparent group-hover:border-muted-foreground/70 h-60 transition-all ease-in-out bg-neutral-200 dark:bg-neutral-900 rounded-3xl overflow-hidden relative">
-        <Link className="inset-0 absolute z-10" to={`/dashboard/${item.name}/${item._id}`} />
+        <Link className="inset-0 absolute z-10" to={`/dashboard/${formattedRoute}/${item._id}`} />
         <div className="w-full h-36 relative p-1.5">
           {
             item.cover !== 'none' ? (
