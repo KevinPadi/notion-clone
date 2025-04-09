@@ -36,9 +36,9 @@ const EditorPage = () => {
                   <BreadcrumbPage className="line-clamp-1">
                     <span className="flex items-center gap-2">
                       <span>
-                        {page.icon && page.icon}
+                        {page.icon !== 'none' && page.icon}
                       </span>
-                    {name}
+                      {name}
                     </span>
                   </BreadcrumbPage>
                 </BreadcrumbItem>
