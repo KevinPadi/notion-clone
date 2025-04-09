@@ -3,7 +3,7 @@ import axios from "axios"
 import { toast } from "react-toastify"
 import { useNavigate } from "react-router-dom"
 import type { JSONContent } from "@tiptap/react"
-// TODO: / navegar hacia la página al crearla / 
+import { formatRoute } from "@/lib/utils"
 
 export interface Page {
   _id: string
@@ -70,6 +70,8 @@ export const PageProvider = ({ children }: { children: React.ReactNode }) => {
     try {
       const { data } = await axios.post(`${BACKEND_URL}/api/pages/create`, {name: name}, { withCredentials: true })
       setPages((prev) => [...prev, data])
+      const formattedRoute = formatRoute(name)
+      navigate(`/dashboard/${formattedRoute}/${data._id}`)
     } catch (error) {
       console.error("Error creating page:", error)
     }
