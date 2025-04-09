@@ -49,7 +49,6 @@ const TiptapEditor = ({ page }: { page: Page }) => {
   
   const debouncedSavedContent = useDebounce((updatedContent: JSONContent) => {
     updatePage(page._id, { content: updatedContent })
-    console.log(updatedContent)
   }, 1000)
 
   const editor = useEditor({
@@ -64,7 +63,6 @@ const TiptapEditor = ({ page }: { page: Page }) => {
     onUpdate: ({ editor }) => {
       const updatedContent = editor.getJSON()
       debouncedSavedContent(editor.getJSON())
-      console.log(updatedContent)
       setEditorState(updatedContent)
     }
   })
