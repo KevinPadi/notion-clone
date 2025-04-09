@@ -121,6 +121,7 @@ const NavItemDropdown = ({favorite, pageId, name}: NavItemDropdownTypeProps ) =>
                   id  ="name"
                   className="col-span-3"
                   placeholder={name}
+                  minLength={1}
                   maxLength={64}
                 />
             </div>
@@ -128,7 +129,7 @@ const NavItemDropdown = ({favorite, pageId, name}: NavItemDropdownTypeProps ) =>
               <DialogClose asChild>
                 <Button onClick={() => setOpenDialog(false)} variant={'outline'} size={'sm'}> Cancelar </Button>
               </DialogClose>
-              <Button onClick={() => handleUpdateNamePage(inputValue)} size={'sm'}> 
+              <Button onClick={() => handleUpdateNamePage(inputValue)} size={'sm'} disabled={isSubmitting || inputValue.length < 1}> 
                 {
                   isSubmitting === true && (
                     <Loader2 className="animate-spin size-5" />
