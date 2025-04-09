@@ -12,6 +12,7 @@ import {
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Button } from "@/components/ui/button"
 import { Separator } from "@/components/ui/separator"
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "./ui/tooltip"
 
 // Datos de atajos de teclado
 const shortcuts = [
@@ -142,11 +143,21 @@ export function ShortcutsDialog() {
 
   return (
     <Dialog open={open} onOpenChange={setOpen}>
-      <DialogTrigger asChild>
-        <Button className="size-7" variant="ghost" size="sm">
-          <Info />
-        </Button>
-      </DialogTrigger>
+      <TooltipProvider>
+        <Tooltip>
+          <TooltipTrigger asChild>
+            <DialogTrigger asChild>
+              <Button className="size-7" variant="ghost" size="sm">
+                <Info />
+              </Button>
+            </DialogTrigger>
+          </TooltipTrigger>
+          <TooltipContent>
+            <p>Abrir lista de comandos</p>
+          </TooltipContent>
+        </Tooltip>
+      </TooltipProvider>
+
       <DialogContent className="p-0 gap-0 max-w-[95vw] sm:max-w-3xl">
         <DialogHeader className="px-4 sm:px-6 pt-4 sm:pt-6">
           <DialogTitle>Atajos de teclado</DialogTitle>
