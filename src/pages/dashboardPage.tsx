@@ -16,13 +16,33 @@ import { Routes, Route, Navigate } from "react-router-dom"
 import DashboardHome from "./dashboardHome"
 import DashboardAccount from "./dashboardAccount"
 import EditorPage from "./editorPage"
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip"
 
 export default function DashboardPage() {
   return (
     <SidebarProvider>
       <AppSidebar />
       <SidebarInset>
-            <SidebarTrigger className="fixed top-3 ml-2" />
+        <TooltipProvider>
+          <Tooltip>
+            <TooltipTrigger className="fixed top-3 ml-2" asChild>
+              <SidebarTrigger />
+            </TooltipTrigger>
+            <TooltipContent side="right">
+              <p className="flex gap-2 items-center font-medium">
+                Abrir/Cerrar Sidebar
+                <kbd className="flex h-fit w-fit items-center justify-center rounded border bg-muted-foreground p-px text-xs font-medium"
+>
+                  Ctrl
+                </kbd>
+                <kbd className="flex h-fit w-fit items-center justify-center rounded border bg-muted-foreground p-px text-xs font-medium"
+>
+                  S
+                </kbd>
+              </p>
+            </TooltipContent>
+          </Tooltip>
+        </TooltipProvider>
         {/* <header className="flex h-14 shrink-0 items-center gap-2">
           <div className="flex flex-1 items-center gap-2 px-3">
             <Separator orientation="vertical" className="mr-2 h-4" />
