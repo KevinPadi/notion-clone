@@ -1,35 +1,48 @@
 import { FileText } from "lucide-react"
 import { Page } from "@/context/pages_context"
 import { Link } from "react-router-dom"
+import dayjs from 'dayjs'
+import relativeTime from 'dayjs/plugin/relativeTime'
+import { formatRoute } from "@/lib/utils"
 
 type CardPagePropsType = {
   item: Page
 }
 
 const CardPage = ({item}: CardPagePropsType) => {
-  const formattedRoute = item.name.toLowerCase().replace(/\s+/g, '-')
+  const formattedRoute = formatRoute(item.name)
+
+  dayjs.extend(relativeTime) 
+  dayjs.locale('es')
+  
+  const lastUpdated = dayjs(item.updatedAt)
 
   return (
-    <li key={item._id} className="w-full max-w-80 group hover:cursor-pointer">
-      <article className="w-full border border-transparent group-hover:border-muted-foreground/70 h-60 transition-all ease-in-out bg-neutral-200 dark:bg-neutral-900 rounded-3xl overflow-hidden relative p-1.5">
-        <Link className="inset-0 absolute z-10" to={`/dashboard/${formattedRoute}/${item._id}`} />
-        <div className="w-full h-36 relative">
-          {
-            item.cover !== 'none' ? (
-              <img src={item.cover} alt="Cover image" className="size-full object-cover object-center rounded-2xl" />
-            ) : (
-              <div className="bg-muted size-full p-10 rounded-2xl" ></div>
-            )
-          }
-          <span className="absolute left-4 -translate-y-1/2 text-3xl">
-            {
-              item.icon !== 'none' ? item.icon : <FileText className="text-muted-foreground stroke-[1.5] size-10"/>
-            }
-          </span>
-        </div>
-        <h2 className="text-lg mt-8 px-4 truncate">
-          {item.name}
+    <li key={item._id} className="w-full flex flex-col max-w-80 group hover:cursor-pointer">
+      <article className="w-full border border-transparent group-hover:border-muted-foreground/70 h-64 transition-all ease-in-out bg-neutral-200 dark:bg-neutral-900 rounded-3xl relative p-1.5 flex flex-col">
+      <Link className="inset-0 absolute z-10" to={`/dashboard/${formattedRoute}/${item._id}`} />
+      <div className="w-full h-36 relative">
+        {
+        item.cover !== 'none' ? (
+          <img src={item.cover} alt="Cover image" className="size-full object-cover object-center rounded-2xl" />
+        ) : (
+          <div className="bg-muted size-full p-10 rounded-2xl" ></div>
+        )
+        }
+        <span className="absolute left-4 -translate-y-1/2 text-3xl">
+        {
+          item.icon !== 'none' ? item.icon : <FileText className="text-muted-foreground stroke-[1.5] size-10"/>
+        }
+        </span>
+      </div>
+      <div className="flex flex-1 flex-col justify-end px-4 p-2">
+        <h2 className="text-lg truncate">
+        {item.name}
         </h2>
+        <p className="text-sm text-muted-foreground">
+          {lastUpdated.fromNow()}
+        </p>
+      </div>
       </article>
     </li>
   )
