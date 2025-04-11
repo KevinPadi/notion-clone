@@ -13,122 +13,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Button } from "@/components/ui/button"
 import { Separator } from "@/components/ui/separator"
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "./ui/tooltip"
-
-// Datos de atajos de teclado
-const shortcuts = [
-  {
-    section: "Barra lateral",
-    commands: [
-      {
-        description: "Abrir/Cerrar barra lateral",
-        keys: ["Ctrl S"],
-      },
-    ],
-  },
-  {
-    section: "Editor",
-    commands: [
-      {
-        description: "Copiar",
-        keys: ["Ctrl C", "Cmd C"],
-      },
-      {
-        description: "Cortar",
-        keys: ["Ctrl X", "Cmd X"],
-      },
-      {
-        description: "Pegar",
-        keys: ["Ctrl V", "Cmd V"],
-      },
-      {
-        description: "Pegar sin formato",
-        keys: ["Ctrl Shift V", "Cmd Shift V"],
-      },
-      {
-        description: "Deshacer",
-        keys: ["Ctrl Z", "Cmd Z"],
-      },
-      {
-        description: "Rehacer",
-        keys: ["Ctrl Shift Z", "Cmd Shift Z"],
-      },
-      {
-        description: "Agregar salto de línea",
-        keys: ["Shift Enter"],
-      },
-    ],
-  },
-  {
-    section: "Formato de texto",
-    commands: [
-      {
-        description: "Negrita",
-        keys: ["Ctrl B", "Cmd B"],
-      },
-      {
-        description: "Cursiva",
-        keys: ["Ctrl I", "Cmd I"],
-      },
-      {
-        description: "Subrayado",
-        keys: ["Ctrl U", "Cmd U"],
-      },
-      {
-        description: "Tachado",
-        keys: ["Ctrl Shift S", "Cmd Shift S"],
-      },
-      {
-        description: "Resaltado",
-        keys: ["Ctrl Shift H", "Cmd Shift H"],
-      },
-      {
-        description: "Código",
-        keys: ["Ctrl E", "Cmd E"],
-      },
-    ],
-  },
-  {
-    section: "Formato de párrafo",
-    commands: [
-      {
-        description: "Lista ordenada",
-        keys: ["Ctrl Shift 7", "Cmd Shift 7"],
-      },
-      {
-        description: "Lista con viñetas",
-        keys: ["Ctrl Shift 8", "Cmd Shift 8"],
-      },
-      {
-        description: "Lista de tareas",
-        keys: ["Ctrl Shift 9", "Cmd Shift 9"],
-      },
-      {
-        description: "Cita",
-        keys: ["Ctrl Shift B", "Cmd Shift B"],
-      },
-      {
-        description: "Alinear a la izquierda",
-        keys: ["Ctrl Shift L", "Cmd Shift L"],
-      },
-      {
-        description: "Alinear al centro",
-        keys: ["Ctrl Shift E", "Cmd Shift E"],
-      },
-      {
-        description: "Alinear a la derecha",
-        keys: ["Ctrl Shift R", "Cmd Shift R"],
-      },
-      {
-        description: "Justificar",
-        keys: ["Ctrl Shift J", "Cmd Shift J"],
-      },
-      {
-        description: "Bloque de código",
-        keys: ["Ctrl Alt C", "Cmd Alt C"],
-      },
-    ],
-  },
-]
+import shortcuts from "@/data/shortcuts.json"
 
 export function ShortcutsDialog() {
   const [open, setOpen] = useState(false)
@@ -159,7 +44,7 @@ export function ShortcutsDialog() {
       </TooltipProvider>
 
       <DialogContent className="p-0 gap-0 max-w-[95vw] sm:max-w-3xl">
-        <DialogHeader className="px-4 sm:px-6 pt-4 sm:pt-6">
+        <DialogHeader className="px-4 sm:px-6 pt-4 sm:pt-6 sm:pb-4">
           <DialogTitle>Atajos de teclado</DialogTitle>
           <DialogDescription className="hidden sm:block">
             Lista de atajos de teclado para ayudarte a navegar por la aplicación.
