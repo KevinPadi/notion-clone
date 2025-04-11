@@ -83,7 +83,7 @@ export function NavUser() {
               </DropdownMenuItem>
 
               {/* Theme Switcher */}
-              <DropdownMenuItem className="hover:bg-transparent dark:hover:bg-transparent hover:cursor-auto">
+              <DropdownMenuItem className="hover:!bg-transparent dark:hover:bg-transparent hover:cursor-auto">
                 <div className="flex items-center justify-between w-full">
                   <span className="text-sm">Tema</span>
                   <div className="flex items-center gap-1 rounded-full border p-1">

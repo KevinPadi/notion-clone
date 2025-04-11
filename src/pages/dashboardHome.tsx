@@ -21,16 +21,30 @@ const DashboardHome = () => {
   
   }, [])
   
+  const favoritePages = pages?.filter(page => page.favorite)
+  const nonFavoritePages = pages?.filter(page => !page.favorite)
+
   return (
     <div className="p-1 max-w-2xl w-full self-center mt-6 space-y-20">
       <h1 className="text-4xl font-medium text-center">
         {greetingMessage}, {user?.name}
       </h1>
       <section>
+        <h2 className="text-2xl font-semibold mb-4">Páginas Favoritas</h2>
         <ul className="flex flex-col sm:flex-row items-center gap-4 justify-between flex-wrap">
           {
-            pages?.map((item) => (
-              <CardPage item={item} />
+            favoritePages?.map((item) => (
+              <CardPage key={item._id} item={item} />
+            ))
+          }
+        </ul>
+      </section>
+      <section>
+        <h2 className="text-2xl font-semibold mb-4">Otras Páginas</h2>
+        <ul className="flex flex-col sm:flex-row items-center gap-4 justify-between flex-wrap">
+          {
+            nonFavoritePages?.map((item) => (
+              <CardPage key={item._id} item={item} />
             ))
           }
         </ul>
