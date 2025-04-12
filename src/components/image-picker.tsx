@@ -17,14 +17,14 @@ type ImagePickerPropTypes = {
 
 type Images = {
   name: string
-  full: string,
+  regular: string
   thumb: string
   alt_description: string
 }
 
 interface UnsplashImage {
   user: { name: string };
-  urls: { thumb: string; full: string }
+  urls: { thumb: string; regular: string }
   alt_description: string
 }
 
@@ -48,7 +48,7 @@ const ImagePicker = ( {pageId}: ImagePickerPropTypes) => {
       const data = res.data.results.map(image => ({
         name: image.user.name,
         thumb: image.urls.thumb,
-        full: image.urls.full,
+        regular: image.urls.regular,
         alt_description: image.alt_description
       }))
       setImages(data)
@@ -107,7 +107,7 @@ const ImagePicker = ( {pageId}: ImagePickerPropTypes) => {
                   <>
                     {
                       images.map((image) => (
-                        <div onClick={() => handleUpdatePage(image.full)} className="group">
+                        <div onClick={() => handleUpdatePage(image.regular)} className="group">
                           <img src={image.thumb} alt={image.alt_description} className="rounded-lg aspect-video h-20 object-cover transition-all ease-in-out duration-300 hover:cursor-pointer hover:scale-105" />
                           <p className="text-xs text-muted-foreground font-normal">
                             {image.name}
