@@ -9,7 +9,6 @@ export function useRedirectIfAuth () {
 
   useEffect(() => {
     if (user) {
-      console.log(user)
       navigate('/dashboard/home');
     }
   }, []);
