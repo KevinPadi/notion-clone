@@ -9,7 +9,7 @@ type EditorBubbleMenuProps = {
 
 const EditorBubbleMenu = ({ editor }: EditorBubbleMenuProps) => {
   return (
-    <BubbleMenu className="bg-muted rounded-lg border shadow-lg p-1 space-x-2" tippyOptions={{ duration: 100 }} editor={editor}>
+    <BubbleMenu className="bg-muted rounded-lg border shadow-lg p-1 max-w-[1000px] space-x-2 z-[9999999999999999999999]" tippyOptions={{ duration: 100 }} editor={editor}>
         <TooltipProvider>
 
           <Tooltip>
@@ -85,22 +85,6 @@ const EditorBubbleMenu = ({ editor }: EditorBubbleMenuProps) => {
             </TooltipTrigger>
             <TooltipContent className='bg'>
               <p> Marcar como código </p>
-            </TooltipContent>
-          </Tooltip>
-
-          <Tooltip>
-            <TooltipTrigger asChild>
-            <Button
-              variant='ghost'
-              size='icon'
-              onClick={() => editor?.chain().focus().toggleHighlight().run()}
-              className={`hover:bg-neutral-200 hover:dark:bg-neutral-700 size-8 ${editor?.isActive('highlight') ? 'is-active text-emerald-600 dark:text-emerald-400 hover:text-emerald-600 dark:hover:text-emerald-400' : ''}`}
-              >
-              <Highlighter className='size-5' />
-            </Button>
-            </TooltipTrigger>
-            <TooltipContent className='bg'>
-              <p> Resaltar </p>
             </TooltipContent>
           </Tooltip>
 

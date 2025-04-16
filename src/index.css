@@ -271,6 +271,10 @@
   }
 }
 
+.tippy-box {
+  max-width: 500px !important;
+}
+
 /* Estilos para el mark Highlighter */
 
 mark {
