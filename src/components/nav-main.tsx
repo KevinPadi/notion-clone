@@ -3,16 +3,15 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from "@/components/ui/sidebar"
-import { Input } from "./ui/input"
 import { Link, useLocation } from "react-router-dom"
 import { SquarePenIcon, SquarePenIconHandle } from "./icons/square-pen"
 import { useRef, useState } from "react"
-import { SearchIcon, SearchIconHandle } from "./icons/search-icon"
 import { HomeIcon, HomeIconHandle } from "./icons/home-icon"
 import { AnimatePresence, motion } from "motion/react"
 import { Button } from "./ui/button"
-import { Check, X } from "lucide-react"
+import { Check, Send, X } from "lucide-react"
 import { usePagesContext } from "@/context/pages_context"
+import CommandMenu from "./command-menu"
 
 export function NavMain() {
   const [isCreating, setIsCreating] = useState(false)
@@ -21,7 +20,6 @@ export function NavMain() {
   const location = useLocation()
 
   const squarePenIconRef = useRef<SquarePenIconHandle>(null)
-  const searchIconRef = useRef<SearchIconHandle>(null)
   const homeIconRef = useRef<HomeIconHandle>(null)
 
   const handleCreatePage = () => {
@@ -81,23 +79,9 @@ export function NavMain() {
           )}
         </AnimatePresence>
       </SidebarMenuItem>
-
-        {/* <SidebarMenuItem>
-          <SidebarMenuButton
-            className="hover:cursor-pointer bg-primary text-primary-foreground hover:bg-primary/90 hover:text-primary-foreground active:bg-primary active:text-primary-foreground active:scale-95 transition-all ease-in-out h-9"
-            onMouseEnter={() => squarePenIconRef.current?.startAnimation()}
-            onMouseLeave={() => squarePenIconRef.current?.stopAnimation()}
-          >
-            <SquarePenIcon className="p-0 hover:bg-transparent" size={20} ref={squarePenIconRef} />
-            <span className="font-medium">Nueva página</span>
-
-          </SidebarMenuButton>
-        </SidebarMenuItem> */}
-      
         <SidebarMenuItem>
-          <SidebarMenuButton className="p-0 relative">
-            <SearchIcon ref={searchIconRef} className="absolute -left-0.5 pointer-events-none" size={20} />
-            <Input onFocus={() => searchIconRef.current?.startAnimation()} placeholder="Buscar" className="w-full border-0 ps-8 bg-transparent dark:bg-transparent" />
+          <SidebarMenuButton className="p-0">
+            <CommandMenu />
           </SidebarMenuButton>
         </SidebarMenuItem>
 
@@ -111,8 +95,15 @@ export function NavMain() {
               onMouseLeave={() => homeIconRef.current?.stopAnimation()}
             >
               <HomeIcon ref={homeIconRef} className="pointer-events-none p-0" size={18} />
-              Home
+              Inicio
             </Link>
+          </SidebarMenuButton>
+        </SidebarMenuItem>
+        <SidebarMenuItem>
+          <SidebarMenuButton className="relative text-muted-foreground">
+            <a className="inset-0 absolute top-0" href="https://github.com/kevinpadi/notion-clone/issues/new?title=Feedback&body=Escribe+tu+comentario+aquí" target="_blank" rel="noopener noreferrer" />
+            <Send/>
+              Feedback
           </SidebarMenuButton>
         </SidebarMenuItem>
     </SidebarMenu>

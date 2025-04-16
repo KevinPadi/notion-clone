@@ -10,10 +10,9 @@ import {
 } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Page, usePagesContext } from "@/context/pages_context"
-import dayjs from 'dayjs'
-import relativeTime from 'dayjs/plugin/relativeTime'
 import 'dayjs/locale/es'
 import { ShortcutsDialog } from "./shortcuts-dialog"
+import { getRelativeTime } from "@/lib/utils"
 
 type NavActionsPropsType = {
   page: Page
@@ -21,16 +20,13 @@ type NavActionsPropsType = {
 
 
 export function NavActions({ page }: NavActionsPropsType) {
-  dayjs.extend(relativeTime) 
-  dayjs.locale('es')
-
   const { updatePage } = usePagesContext()
-  const lastUpdated = dayjs(page.updatedAt)
+  const lastUpdated = getRelativeTime(page.updatedAt)
   
   return (
     <div className="flex items-center gap-2 text-sm">
       <div className="text-muted-foreground hidden font-medium md:inline-block">
-        {lastUpdated.fromNow()}
+        {lastUpdated}
       </div>
       <TooltipProvider>
       <Tooltip>

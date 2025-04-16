@@ -1,9 +1,7 @@
 import { Clock, FileText } from "lucide-react"
 import { Page } from "@/context/pages_context"
 import { Link } from "react-router-dom"
-import dayjs from 'dayjs'
-import relativeTime from 'dayjs/plugin/relativeTime'
-import { formatRoute } from "@/lib/utils"
+import { formatRoute, getRelativeTime } from "@/lib/utils"
 
 type CardPagePropsType = {
   item: Page
@@ -11,12 +9,7 @@ type CardPagePropsType = {
 
 const CardPage = ({item}: CardPagePropsType) => {
   const formattedRoute = formatRoute(item.name)
-
-  dayjs.extend(relativeTime) 
-  dayjs.locale('es')
-  
-  const lastUpdated = dayjs(item.updatedAt)
-
+  const lastUpdated = getRelativeTime(item.updatedAt)
   return (
     <li key={item._id} className="w-full flex flex-col max-w-80 group hover:cursor-pointer">
       <article className="w-full border border-transparent group-hover:border-muted-foreground/70 h-64 transition-all ease-in-out bg-muted rounded-3xl relative p-1.5 flex flex-col">
@@ -41,7 +34,7 @@ const CardPage = ({item}: CardPagePropsType) => {
         </h2>
         <p className="flex items-center gap-1 text-xs text-muted-foreground">
           <Clock className="size-3 translate-y-px" />
-          {lastUpdated.fromNow()}
+          {lastUpdated}
         </p>
       </div>
       </article>
