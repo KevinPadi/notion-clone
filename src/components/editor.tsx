@@ -10,6 +10,7 @@ import { useState } from 'react'
 import useDebounce from '@/hooks/useDebounce'
 import EditorFloatingMenu from './editor-floating-menu'
 import EditorBubbleMenu from './editor-bubble-menu'
+import Placeholder from '@tiptap/extension-placeholder'
 
 const extensions = [
   StarterKit,
@@ -22,6 +23,18 @@ const extensions = [
     TaskItem.configure({
       nested: true,
     }),
+  Placeholder.configure({
+    // Use a placeholder:
+    placeholder: 'Escribe algo …',
+    // Use different placeholders depending on the node type:
+    // placeholder: ({ node }) => {
+    //   if (node.type.name === 'heading') {
+    //     return 'What’s the title?'
+    //   }
+
+    //   return 'Can you add some further context?'
+    // },
+  }),
 ]
 
 const TiptapEditor = ({ page }: { page: Page }) => {
