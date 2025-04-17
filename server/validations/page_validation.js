@@ -16,6 +16,10 @@ export const editPageSchema = z.object({
     .max(64, 'El nombre no puede tener más de 64 caracteres').optional(),
   content: z.any().optional(), // JSON al inicio vacío
   icon: z.string().optional(),
-  cover: z.string().url('Porfavor usa una url válida').optional(), 
+  cover: z.string()
+  .refine(val => val === 'none' || /^https?:\/\/.+$/.test(val), {
+    message: 'Debe ser una URL válida o "none"',
+  })
+  .optional(),
   favorite: z.boolean().optional(),
 })

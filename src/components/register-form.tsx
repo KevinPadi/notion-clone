@@ -33,10 +33,6 @@ export function RegisterForm({ className, ...props }: React.ComponentProps<"div"
     resolver: zodResolver(authSchema),
   })
 
-  useEffect(() => {
-    console.log(isSubmitting)
-  }, [isSubmitting])
-
   const onSubmit = async (data: AuthSchema) => {
     await registerUser(data)
   }

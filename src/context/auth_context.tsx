@@ -2,6 +2,7 @@ import { createContext, useContext, useEffect, useState } from "react"
 import axios from "axios"
 import { toast } from "react-toastify"
 import { useNavigate } from "react-router-dom"
+import { UpdateUserSchema } from "@/schemas/auth_schema"
 
 interface User {
   _id: string,
@@ -14,6 +15,7 @@ interface AuthContextType {
   user: User | null
   loading: boolean
   login: (data: Omit<AuthData, 'name'>) => Promise<void>
+  editUser: (data: UpdateUserSchema) => Promise<void>
   loginAsGuest: () => Promise<void>
   handleGoogleLogin: () => void
   register: (data: AuthData) => Promise<void>
@@ -53,11 +55,32 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     }
   }
 
-  const login = async (data: Omit<AuthData, 'name'>) => {
+  const login = async (data: Omit<AuthData, 'name' | 'avatar'>) => {
     try {
       await axios.post(`${BACKEND_URL}/api/auth/login`, data, { withCredentials: true })
       await checkAuth()
       navigate('/dashboard')
+    } catch (error: any) {
+      const errorMessage = error?.response?.data?.message || 'Error desconocido';
+      toast.error(`Error: ${errorMessage}`);
+    }
+  }
+
+  const editUser = async (data: UpdateUserSchema) => {
+    try { 
+      const res = await axios.put(`${BACKEND_URL}/api/auth/edit-user`, data, { withCredentials: true })
+      if(res.statusText === 'OK') {
+        setUser((prevUser) => {
+          if (!prevUser) return prevUser
+          return {
+            ...prevUser,
+            name: data.name || prevUser.name,
+            avatar: data.avatar ||prevUser.avatar
+          };
+        })
+        toast.success('Cambios guardados correctamente')
+
+      }
     } catch (error: any) {
       const errorMessage = error?.response?.data?.message || 'Error desconocido';
       toast.error(`Error: ${errorMessage}`);
@@ -116,7 +139,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
       await axios.delete(`${BACKEND_URL}/api/auth/delete`, { withCredentials: true })
       setUser(null)
       toast.success("Cuenta eliminada exitosamente")
-      navigate('/register')
+      navigate('/')
     } catch (error: any) {
       const errorMessage = error?.response?.data?.message || "Error al eliminar la cuenta"
       toast.error(errorMessage)
@@ -133,7 +156,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   }, [])
 
   return (
-    <AuthContext.Provider value={{ user, loading, login, register, logout, deleteUser, loginAsGuest, handleGoogleLogin }}>
+    <AuthContext.Provider value={{ user, loading, login, editUser, register, logout, deleteUser, loginAsGuest, handleGoogleLogin }}>
       {children}
     </AuthContext.Provider>
   )

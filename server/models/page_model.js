@@ -1,8 +1,27 @@
-import mongoose from "mongoose";
+import mongoose from "mongoose"
+
+const DEFAULT_DATA = {
+    "type": "doc",
+    "content": [
+        {
+            "type": "paragraph",
+            "attrs": {
+                "textAlign": null,
+                "level": 1
+            },
+            "content": [
+                {
+                    "type": "text",
+                    "text": ""
+                }
+            ]
+        }
+    ]
+}
 
 const PageSchema = new mongoose.Schema({
   name: { type: String, required: true },
-  content: { type: mongoose.Schema.Types.Mixed, default: {} },
+  content: { type: Object, default: DEFAULT_DATA },
   icon: { type: String, default: "none" },
   cover: { type: String, default: "none" },
   favorite: { type: Boolean, default: false },
