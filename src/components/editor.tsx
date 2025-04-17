@@ -24,16 +24,7 @@ const extensions = [
       nested: true,
     }),
   Placeholder.configure({
-    // Use a placeholder:
-    placeholder: 'Escribe algo …',
-    // Use different placeholders depending on the node type:
-    // placeholder: ({ node }) => {
-    //   if (node.type.name === 'heading') {
-    //     return 'What’s the title?'
-    //   }
-
-    //   return 'Can you add some further context?'
-    // },
+    placeholder: 'Escribe algo …'
   }),
 ]
 

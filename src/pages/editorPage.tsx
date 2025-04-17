@@ -27,7 +27,7 @@ const EditorPage = () => {
 
   return (
     <div className="flex flex-col gap-6 p-4 bg-white dark:bg-neutral-950 rounded-xl self-center w-full">
-      <header className="flex h-14 shrink-0 items-center gap-2 -mt-15">
+      <header className="flex h-14 shrink-0 items-center gap-2 -mt-15 sticky top-0">
           <div className="flex flex-1 items-center gap-2 px-3">
             <Separator orientation="vertical" className="mr-2 h-4" />
             <Breadcrumb>
