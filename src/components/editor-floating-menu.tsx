@@ -10,7 +10,7 @@ type EditorFloatingMenuProps = {
 
 const EditorFloatingMenu = ({editor}: EditorFloatingMenuProps) => {
   return (
-    <FloatingMenu className="space-x-2 bg-muted w-3xl border p-1 rounded-lg shadow-lg" tippyOptions={{ duration: 100 }} editor={editor}>  
+    <FloatingMenu className="space-x-2 bg-muted border p-1 rounded-lg shadow-lg" tippyOptions={{ duration: 100 }} editor={editor}>  
             <TooltipProvider>
               <Tooltip>
                 <TooltipTrigger asChild>
