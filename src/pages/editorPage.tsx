@@ -19,7 +19,6 @@ const EditorPage = () => {
   
   useEffect(() => {
     if (!id) return
-    console.log('hizo el fetch al id:', id)
     getPageById(id)
   }, [location])
   

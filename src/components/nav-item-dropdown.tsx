@@ -42,6 +42,7 @@ const NavItemDropdown = ({favorite, pageId, name}: NavItemDropdownTypeProps ) =>
   const { isMobile } = useSidebar()
   const [inputValue, setInputValue] = useState(name)
   const [ openDialog, setOpenDialog ] = useState(false)
+  const [ openDropdown, setOpenDropdown ] = useState(false)
   const [isSubmitting, setIsSubmitting] = useState(false)
 
   const deleteIconRef = useRef<DeleteIconHandle>(null)
@@ -64,7 +65,8 @@ const NavItemDropdown = ({favorite, pageId, name}: NavItemDropdownTypeProps ) =>
   }
 
   return (
-    <DropdownMenu>
+    <Dialog open={openDialog} onOpenChange={setOpenDialog}>
+    <DropdownMenu open={openDropdown} onOpenChange={setOpenDropdown}>
       <DropdownMenuTrigger asChild>
         <SidebarMenuAction className="hover:cursor-pointer" showOnHover>
           <MoreHorizontal />
@@ -77,71 +79,29 @@ const NavItemDropdown = ({favorite, pageId, name}: NavItemDropdownTypeProps ) =>
         align={isMobile ? "end" : "start"}
       >
         <DropdownMenuItem onClick={() => handleUpdateFavorite()}>
-          {
-            favorite ? (
-              <StarOff className="text-muted-foreground" />
-            ) : (
-              <Star className="text-muted-foreground" />
-            )
-          }
-          <span>
-          {
-            favorite ? (
-              'Eliminar de favoritos'
-            ) : (
-              'Agregar a favoritos'
-            )
-          }
-          </span>
+          {favorite ? (
+            <StarOff className="text-muted-foreground" />
+          ) : (
+            <Star className="text-muted-foreground" />
+          )}
+          <span>{favorite ? "Eliminar de favoritos" : "Agregar a favoritos"}</span>
         </DropdownMenuItem>
+  
         <DropdownMenuSeparator />
-
-        <Dialog open={openDialog} onOpenChange={setOpenDialog} >
-          <DropdownMenu>
-            <DialogTrigger asChild>
-              <DropdownMenuItem
-                onClick={() => setOpenDialog(true)}
-                className="flex justify-start p-2 rounded-sm font-normal"
-                onMouseEnter={() => penIconRef.current?.startAnimation()}
-                onMouseLeave={() => penIconRef.current?.stopAnimation()}
-                >
-                <SquarePenIcon ref={penIconRef} className="p-0 text-muted-foreground" />
-                <span>Cambiar nombre</span>
-              </DropdownMenuItem>
-              </DialogTrigger>
-          </DropdownMenu>
-          <DialogContent className="sm:max-w-[425px]">
-            <DialogHeader>
-              <DialogTitle>Renombra la página</DialogTitle>
-            </DialogHeader>
-            <div className="grid gap-4 py-4">
-                <Input
-                  value={inputValue}
-                  onChange={(e) => setInputValue(e.target.value)}
-                  id  ="name"
-                  className="col-span-3"
-                  placeholder={name}
-                  minLength={1}
-                  maxLength={64}
-                />
-            </div>
-            <DialogFooter>
-              <DialogClose asChild>
-                <Button onClick={() => setOpenDialog(false)} variant={'outline'} size={'sm'}> Cancelar </Button>
-              </DialogClose>
-              <Button onClick={() => handleUpdateNamePage(inputValue)} size={'sm'} disabled={isSubmitting || inputValue.length < 1}> 
-                {
-                  isSubmitting === true && (
-                    <Loader2 className="animate-spin size-5" />
-                  )
-                }
-                Guardar
-              </Button>
-            </DialogFooter>
-          </DialogContent>
-        </Dialog>
-
+  
+        <DialogTrigger onClick={() => setOpenDropdown(false)} asChild>
+          <DropdownMenuItem
+            className="flex justify-start p-2 rounded-sm font-normal"
+            onMouseEnter={() => penIconRef.current?.startAnimation()}
+            onMouseLeave={() => penIconRef.current?.stopAnimation()}
+          >
+            <SquarePenIcon ref={penIconRef} className="p-0 text-muted-foreground" />
+            <span>Cambiar nombre</span>
+          </DropdownMenuItem>
+        </DialogTrigger>
+  
         <DropdownMenuSeparator />
+  
         <DropdownMenuItem
           onClick={() => deletePage(pageId)}
           className="focus:bg-destructive/10 dark:hover:bg-destructive/10"
@@ -153,6 +113,40 @@ const NavItemDropdown = ({favorite, pageId, name}: NavItemDropdownTypeProps ) =>
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
+  
+    <DialogContent className="sm:max-w-[425px]">
+      <DialogHeader>
+        <DialogTitle>Renombra la página</DialogTitle>
+      </DialogHeader>
+      <div className="grid gap-4 py-4">
+        <Input
+          value={inputValue}
+          onChange={(e) => setInputValue(e.target.value)}
+          id="name"
+          className="col-span-3"
+          placeholder={name}
+          minLength={1}
+          maxLength={64}
+        />
+      </div>
+      <DialogFooter>
+        <DialogClose asChild>
+          <Button onClick={() => setOpenDialog(false)} variant="outline" size="sm">
+            Cancelar
+          </Button>
+        </DialogClose>
+        <Button
+          onClick={() => handleUpdateNamePage(inputValue)}
+          size="sm"
+          disabled={isSubmitting || inputValue.length < 1}
+        >
+          {isSubmitting && <Loader2 className="animate-spin size-5" />}
+          Guardar
+        </Button>
+      </DialogFooter>
+    </DialogContent>
+  </Dialog>
+  
   )
 }
 
