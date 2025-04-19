@@ -42,6 +42,7 @@ const NavItemDropdown = ({favorite, pageId, name}: NavItemDropdownTypeProps ) =>
   const { isMobile } = useSidebar()
   const [inputValue, setInputValue] = useState(name)
   const [ openDialog, setOpenDialog ] = useState(false)
+  const [ openDropdown, setOpenDropdown ] = useState(false)
   const [isSubmitting, setIsSubmitting] = useState(false)
 
   const deleteIconRef = useRef<DeleteIconHandle>(null)
@@ -65,7 +66,7 @@ const NavItemDropdown = ({favorite, pageId, name}: NavItemDropdownTypeProps ) =>
 
   return (
     <Dialog open={openDialog} onOpenChange={setOpenDialog}>
-    <DropdownMenu>
+    <DropdownMenu open={openDropdown} onOpenChange={setOpenDropdown}>
       <DropdownMenuTrigger asChild>
         <SidebarMenuAction className="hover:cursor-pointer" showOnHover>
           <MoreHorizontal />
@@ -88,7 +89,7 @@ const NavItemDropdown = ({favorite, pageId, name}: NavItemDropdownTypeProps ) =>
   
         <DropdownMenuSeparator />
   
-        <DialogTrigger asChild>
+        <DialogTrigger onClick={() => setOpenDropdown(false)} asChild>
           <DropdownMenuItem
             className="flex justify-start p-2 rounded-sm font-normal"
             onMouseEnter={() => penIconRef.current?.startAnimation()}
