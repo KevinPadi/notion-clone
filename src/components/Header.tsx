@@ -4,15 +4,17 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
-import { Box, Menu, CircleUserRound, LogIn, UserPlus } from "lucide-react"
+import { Box, CircleUserRound, LogIn, UserPlus } from "lucide-react"
 import { Link } from "react-router-dom"
 import { Button } from "./ui/button"
 import { useAuth } from "@/context/auth_context"
-import {  } from "lucide-react"
-const Header = () => {
+import { MenuIcon, MenuIconHandle } from "@/components/icons/menu"
+import { useRef } from "react"
 
+const Header = () => {
+  const menuRef = useRef<MenuIconHandle>(null);
   const { loginAsGuest } = useAuth()
-  
+
   return (
     <header className="p-4">
         <div className="mx-auto flex justify-between h-16 max-w-screen-xl items-center gap-8 px-4 sm:px-6 lg:px-8 bg-neutral-900 rounded-xl">
@@ -46,9 +48,14 @@ const Header = () => {
 
               {/* mobile menu */}
 
-              <DropdownMenu>
+              <DropdownMenu 
+                onOpenChange={(open) => {
+                  if (open) menuRef.current?.startAnimation();
+                  else menuRef.current?.stopAnimation();
+                }}
+              >
                 <DropdownMenuTrigger>
-                  <Menu className="block md:hidden" />
+                  <MenuIcon ref={menuRef} className="block md:hidden" />
                 </DropdownMenuTrigger>
                 <DropdownMenuContent className="block md:hidden" align="end">
                   <DropdownMenuItem asChild>
