@@ -125,7 +125,7 @@ const CommandMenu = () => {
         <CommandSeparator />
 
         {/* Footer */}
-        <div className="flex gap-4 h-10 w-full items-center absolute bg-neutral-900 bottom-0 p-2 border-t border-t-neutral-800 select-none text-sm">
+        <div className="flex gap-4 h-10 w-full items-center absolute bg-neutral-50 dark:bg-neutral-900 bottom-0 p-2 border-t select-none text-sm">
           <div className="flex items-center gap-2">
             <ArrowUp className="size-6 bg-muted p-1 rounded" />
             <ArrowDown className="size-6 bg-muted p-1 rounded" />
