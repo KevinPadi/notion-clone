@@ -11,6 +11,10 @@ import useDebounce from '@/hooks/useDebounce'
 import EditorFloatingMenu from './editor-floating-menu'
 import EditorBubbleMenu from './editor-bubble-menu'
 import Placeholder from '@tiptap/extension-placeholder'
+import CodeBlockLowlight from '@tiptap/extension-code-block-lowlight'
+import { common, createLowlight } from 'lowlight'
+
+const lowlight = createLowlight(common)
 
 const extensions = [
   StarterKit,
@@ -25,6 +29,9 @@ const extensions = [
     }),
   Placeholder.configure({
     placeholder: 'Escribe algo …'
+  }),
+  CodeBlockLowlight.configure({
+    lowlight,
   }),
 ]
 
@@ -73,6 +80,12 @@ const TiptapEditor = ({ page }: { page: Page }) => {
   
   return (
     <div>
+      <button
+            onClick={() => editor?.chain().focus().toggleCodeBlock().run()}
+            className={editor?.isActive('codeBlock') ? 'is-active' : ''}
+          >
+            Toggle code block
+          </button>
       <EditorContent editor={editor} />
       <EditorFloatingMenu editor={editor} />
       <EditorBubbleMenu editor={editor} />
