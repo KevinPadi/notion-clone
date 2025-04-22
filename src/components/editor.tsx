@@ -80,12 +80,6 @@ const TiptapEditor = ({ page }: { page: Page }) => {
   
   return (
     <div>
-      <button
-            onClick={() => editor?.chain().focus().toggleCodeBlock().run()}
-            className={editor?.isActive('codeBlock') ? 'is-active' : ''}
-          >
-            Toggle code block
-          </button>
       <EditorContent editor={editor} />
       <EditorFloatingMenu editor={editor} />
       <EditorBubbleMenu editor={editor} />

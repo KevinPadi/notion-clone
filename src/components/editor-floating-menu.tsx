@@ -74,7 +74,7 @@ const menuItems = [
 
 const EditorFloatingMenu = ({editor}: EditorFloatingMenuProps) => {
   return (
-    <FloatingMenu className="space-x-1 bg-muted/40 border p-1 rounded-xl shadow-lg" tippyOptions={{ duration: 100 }} editor={editor}>  
+    <FloatingMenu className="space-x-1 bg-neutral-100 dark:bg-neutral-900 border p-1 rounded-xl shadow-lg" tippyOptions={{ duration: 100 }} editor={editor}>  
       <TooltipProvider>
         {menuItems.map(({ icon: Icon, label, isActive, onClick }, i) => (
           <Tooltip key={i}>
