@@ -10,6 +10,7 @@ import { Button } from "./ui/button"
 import { useAuth } from "@/context/auth_context"
 import { MenuIcon, MenuIconHandle } from "@/components/icons/menu"
 import { useRef } from "react"
+import { Separator } from "./ui/separator"
 
 const Header = () => {
   const menuRef = useRef<MenuIconHandle>(null);
@@ -17,7 +18,7 @@ const Header = () => {
 
   return (
     <header className="p-4">
-        <div className="mx-auto flex justify-between h-16 max-w-screen-xl items-center gap-8 px-4 sm:px-6 lg:px-8 bg-neutral-900 rounded-xl">
+        <div className="mx-auto flex justify-between h-16 max-w-screen-xl items-center gap-8 px-4 sm:px-6 lg:px-8 bg-neutral-200 dark:bg-neutral-900 rounded-xl">
           <a className="block text-teal-600 dark:text-teal-300" href="#">
             <span className="sr-only">Home</span>
             <Box className="size-10" />
@@ -27,21 +28,23 @@ const Header = () => {
 
             <div className="flex items-center gap-4">
               <div className="sm:flex sm:gap-4">
-                <div className="divide-x divide-gray-200 dark:divide-gray-700 hidden md:flex"> 
+                <div className="dark:divide-gray-700 hidden md:flex"> 
                   <Link to={'/login'}>
-                    <Button variant={"ghost"}>
+                    <Button className="text-black dark:text-white" variant={"ghost"}>
                       Iniciar Sesión
                     </Button>
                   </Link>
                   
+                  <Separator orientation="vertical" className="h-6 mx-2 bg-muted" />
+
                   <Link to={'/register'}>
-                    <Button variant={"ghost"}>
+                    <Button className="text-black dark:text-white" variant={"ghost"}>
                       Registrarse
                     </Button>
                   </Link>
                 </div>
                 
-                <Button className="bg-emerald-400 hover:bg-emerald-400/80 hidden md:block" onClick={() => loginAsGuest()}>
+                <Button className="bg-emerald-400 hover:bg-emerald-400/80 text-black hidden md:block" onClick={() => loginAsGuest()}>
                   Prueba como invitado
                 </Button>
               </div>
