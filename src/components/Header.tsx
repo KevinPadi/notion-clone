@@ -4,7 +4,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
-import { Box, CircleUserRound, LogIn, UserPlus } from "lucide-react"
+import { CircleUserRound, LogIn, UserPlus } from "lucide-react"
 import { Link } from "react-router-dom"
 import { Button } from "./ui/button"
 import { useAuth } from "@/context/auth_context"
@@ -17,11 +17,11 @@ const Header = () => {
   const { loginAsGuest } = useAuth()
 
   return (
-    <header className="p-4">
-        <div className="mx-auto flex justify-between h-16 max-w-screen-xl items-center gap-8 px-4 sm:px-6 lg:px-8 bg-neutral-200 dark:bg-neutral-900 rounded-xl">
-          <a className="block text-teal-600 dark:text-teal-300" href="#">
+    <header className="w-full">
+        <div className="mx-auto flex justify-between h-16 max-w-screen-xl items-center gap-8 bg-neutral-200 dark:bg-neutral-900 rounded-xl">
+          <a className="block text-teal-600 dark:text-teal-300 pl-2" href="#">
             <span className="sr-only">Home</span>
-            <Box className="size-10" />
+            <img src="/notiony-logo.png" className="size-12 rounded-xl" alt="" />
           </a>
 
           <div className="flex items-center justify-end md:justify-between">
