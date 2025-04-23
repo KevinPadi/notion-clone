@@ -48,12 +48,12 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     try {
       const res = await axios.get(`${BACKEND_URL}/api/protected`, { withCredentials: true })
       setUser(res.data.user)
-    } catch (error) {
+    } catch (error: unknown) {
+      if (axios.isAxiosError(error)) {
+        console.error(error.response?.data)
+      }
       setUser(null)
-    } finally {
-      setLoading(false)
     }
-  }
 
   const login = async (data: Omit<AuthData, 'name' | 'avatar'>) => {
     try {
