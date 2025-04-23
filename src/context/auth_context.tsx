@@ -59,7 +59,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     try {
       await axios.post(`${BACKEND_URL}/api/auth/login`, data, { withCredentials: true })
       await checkAuth()
-      navigate('/dashboard')
+      navigate('/dashboard/home')
     } catch (error: any) {
       const errorMessage = error?.response?.data?.message || 'Error desconocido';
       toast.error(`Error: ${errorMessage}`);
@@ -98,7 +98,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
         autoClose: 5000,
         pauseOnHover: true,
         })
-      navigate('/dashboard')
+      navigate('/dashboard/home')
 
       // delete cookie after 1 hour
       setTimeout(async () => {
@@ -117,7 +117,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     try {
       await axios.post(`${BACKEND_URL}/api/auth/register`, data, { withCredentials: true })
       await checkAuth()
-      navigate('/dashboard')
+      navigate('/dashboard/home')
     } catch (error: any) {
       const errorMessage = error?.response?.data?.message || 'Error desconocido';
       toast.error(`Error: ${errorMessage}`);
