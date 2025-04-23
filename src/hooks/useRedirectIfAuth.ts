@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 
 export function useRedirectIfAuth () {
 
-  const user = useAuth()
+  const { user } = useAuth()
   const navigate = useNavigate()
 
   useEffect(() => {

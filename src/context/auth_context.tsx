@@ -48,10 +48,11 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     try {
       const res = await axios.get(`${BACKEND_URL}/api/protected`, { withCredentials: true })
       setUser(res.data.user)
-    } catch (error) {
+    } catch (error: unknown) {
+      if (axios.isAxiosError(error)) {
+        console.error(error.response?.data)
+      }
       setUser(null)
-    } finally {
-      setLoading(false)
     }
   }
 
@@ -59,10 +60,14 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     try {
       await axios.post(`${BACKEND_URL}/api/auth/login`, data, { withCredentials: true })
       await checkAuth()
-      navigate('/dashboard')
-    } catch (error: any) {
-      const errorMessage = error?.response?.data?.message || 'Error desconocido';
-      toast.error(`Error: ${errorMessage}`);
+      navigate('/dashboard/home')
+    } catch (error: unknown) {
+      if (axios.isAxiosError(error)) {
+        const errorMessage = error.response?.data?.message || 'Error desconocido';
+        toast.error(`Error: ${errorMessage}`);
+      } else {
+        toast.error('Error inesperado');
+      }
     }
   }
 
@@ -81,9 +86,13 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
         toast.success('Cambios guardados correctamente')
 
       }
-    } catch (error: any) {
-      const errorMessage = error?.response?.data?.message || 'Error desconocido';
-      toast.error(`Error: ${errorMessage}`);
+    } catch (error: unknown) {
+      if (axios.isAxiosError(error)) {
+        const errorMessage = error.response?.data?.message || 'Error desconocido';
+        toast.error(`Error: ${errorMessage}`);
+      } else {
+        toast.error('Error inesperado');
+      }
     }
   }
 
@@ -98,7 +107,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
         autoClose: 5000,
         pauseOnHover: true,
         })
-      navigate('/dashboard')
+      navigate('/dashboard/home')
 
       // delete cookie after 1 hour
       setTimeout(async () => {
@@ -117,10 +126,14 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     try {
       await axios.post(`${BACKEND_URL}/api/auth/register`, data, { withCredentials: true })
       await checkAuth()
-      navigate('/dashboard')
-    } catch (error: any) {
-      const errorMessage = error?.response?.data?.message || 'Error desconocido';
-      toast.error(`Error: ${errorMessage}`);
+      navigate('/dashboard/home')
+    } catch (error: unknown) {
+      if (axios.isAxiosError(error)) {
+        const errorMessage = error.response?.data?.message || 'Error desconocido';
+        toast.error(`Error: ${errorMessage}`);
+      } else {
+        toast.error('Error inesperado');
+      }
     }
   }
 
@@ -129,8 +142,13 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
       await axios.post(`${BACKEND_URL}/api/auth/logout`, {}, { withCredentials: true })
       setUser(null)
       navigate('/')
-    } catch (error: any) {
-      toast.error("Error al cerrar sesión");
+    } catch (error: unknown) {
+      if (axios.isAxiosError(error)) {
+        const errorMessage = error.response?.data?.message || 'Error desconocido';
+        toast.error(`Error: ${errorMessage}`);
+      } else {
+        toast.error('Error inesperado');
+      }
     }
   }
 
@@ -140,9 +158,13 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
       setUser(null)
       toast.success("Cuenta eliminada exitosamente")
       navigate('/')
-    } catch (error: any) {
-      const errorMessage = error?.response?.data?.message || "Error al eliminar la cuenta"
-      toast.error(errorMessage)
+    } catch (error: unknown) {
+      if (axios.isAxiosError(error)) {
+        const errorMessage = error.response?.data?.message || 'Error desconocido';
+        toast.error(`Error: ${errorMessage}`);
+      } else {
+        toast.error('Error inesperado');
+      }
     }
   }
 
