@@ -14,7 +14,7 @@ import { Separator } from "./ui/separator"
 
 const Header = () => {
   const menuRef = useRef<MenuIconHandle>(null);
-  const { loginAsGuest } = useAuth()
+  const { user, loginAsGuest } = useAuth()
 
   return (
     <header className="w-full">
@@ -27,59 +27,62 @@ const Header = () => {
           <div className="flex items-center justify-end md:justify-between">
 
             <div className="flex items-center gap-4">
-              <div className="sm:flex sm:gap-4">
-                <div className="dark:divide-gray-700 hidden md:flex"> 
-                  <Link to={'/login'}>
-                    <Button className="text-black dark:text-white" variant={"ghost"}>
-                      Iniciar Sesión
-                    </Button>
-                  </Link>
-                  
-                  <Separator orientation="vertical" className="h-6 mx-2 bg-muted" />
+              {
+                !user && (
+                  <>
+                    <div className="sm:flex sm:gap-4">
+                      <div className="dark:divide-gray-700 hidden md:flex"> 
+                        <Link to={'/login'}>
+                          <Button className="text-black dark:text-white" variant={"ghost"}>
+                            Iniciar Sesión
+                          </Button>
+                        </Link>
+                        
+                        <Separator orientation="vertical" className="h-6 mx-2 bg-muted" />
 
-                  <Link to={'/register'}>
-                    <Button className="text-black dark:text-white" variant={"ghost"}>
-                      Registrarse
-                    </Button>
-                  </Link>
-                </div>
-                
-                <Button className="bg-emerald-400 hover:bg-emerald-400/80 text-black hidden md:block" onClick={() => loginAsGuest()}>
-                  Prueba como invitado
-                </Button>
-              </div>
+                        <Link to={'/register'}>
+                          <Button className="text-black dark:text-white" variant={"ghost"}>
+                            Registrarse
+                          </Button>
+                        </Link>
+                      </div>
+                      
+                      <Button className="bg-emerald-400 hover:bg-emerald-400/80 text-black hidden md:block" onClick={() => loginAsGuest()}>
+                        Prueba como invitado
+                      </Button>
+                    </div>
 
-              {/* mobile menu */}
-
-              <DropdownMenu 
-                onOpenChange={(open) => {
-                  if (open) menuRef.current?.startAnimation();
-                  else menuRef.current?.stopAnimation();
-                }}
-              >
-                <DropdownMenuTrigger>
-                  <MenuIcon ref={menuRef} className="block md:hidden" />
-                </DropdownMenuTrigger>
-                <DropdownMenuContent className="block md:hidden" align="end">
-                  <DropdownMenuItem asChild>
-                    <Link to={'/login'}>
-                      <LogIn />
-                      Iniciar sesión
-                    </Link>
-                  </DropdownMenuItem>
-                  <DropdownMenuItem asChild>
-                    <Link to={'/register'}>
-                      <UserPlus />
-                      Registrarse
-                    </Link>
-                  </DropdownMenuItem>
-                  <DropdownMenuItem onClick={() => loginAsGuest()}>
-                    <CircleUserRound />
-                    Prueba como invitado
-                  </DropdownMenuItem>
-                </DropdownMenuContent>
-              </DropdownMenu>
-
+                    <DropdownMenu 
+                    onOpenChange={(open) => {
+                      if (open) menuRef.current?.startAnimation();
+                        else menuRef.current?.stopAnimation();
+                      }}
+                    >
+                      <DropdownMenuTrigger>
+                        <MenuIcon ref={menuRef} className="block md:hidden" />
+                      </DropdownMenuTrigger>
+                      <DropdownMenuContent className="block md:hidden" align="end">
+                        <DropdownMenuItem asChild>
+                          <Link to={'/login'}>
+                            <LogIn />
+                            Iniciar sesión
+                          </Link>
+                        </DropdownMenuItem>
+                        <DropdownMenuItem asChild>
+                          <Link to={'/register'}>
+                            <UserPlus />
+                            Registrarse
+                          </Link>
+                        </DropdownMenuItem>
+                        <DropdownMenuItem onClick={() => loginAsGuest()}>
+                          <CircleUserRound />
+                          Prueba como invitado
+                        </DropdownMenuItem>
+                      </DropdownMenuContent>
+                    </DropdownMenu>
+                  </>
+                )
+              }
             </div>
           </div>
         </div>
