@@ -7,7 +7,7 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Link } from "react-router-dom"
 import GoogleIcon from "./icons/google-icon"
-import { useEffect, useRef, useState } from "react"
+import { useRef, useState } from "react"
 import { ArrowRightIcon } from "./icons/arrow-right-icon"
 import type { ArrowRightIconHandle } from "./icons/arrow-right-icon"
 import { useForm } from "react-hook-form"
@@ -15,7 +15,7 @@ import { authSchema } from "@/schemas/auth_schema"
 import type { AuthSchema } from "@/schemas/auth_schema"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useAuth } from "@/context/auth_context"
-import { Eye, EyeIcon as EyeClosed, Loader2 } from "lucide-react"
+import { Eye, EyeClosed, Loader2 } from "lucide-react"
 import { motion } from "motion/react"
 
 export function RegisterForm({ className, ...props }: React.ComponentProps<"div">) {
@@ -74,7 +74,7 @@ export function RegisterForm({ className, ...props }: React.ComponentProps<"div"
                   <button
                     type="button"
                     onClick={() => setIsVisible(!isVisible)}
-                    className="absolute inset-y-0 end-1 top-1 size-fit p-0.5 rounded-md hover:bg-neutral-100 hover:cursor-pointer text-neutral-500"
+                    className="absolute inset-y-0 end-1 top-1 size-fit p-0.5 rounded-md hover:bg-neutral-100 hover:dark:bg-neutral-900 hover:cursor-pointer text-neutral-500"
                   >
                     <motion.div
                       key={isVisible ? "visible" : "hidden"}
@@ -107,7 +107,7 @@ export function RegisterForm({ className, ...props }: React.ComponentProps<"div"
                 )}
               </Button>
               <div className="after:border-border relative text-center text-sm after:absolute after:inset-0 after:top-1/2 after:z-0 after:flex after:items-center after:border-t">
-                <span className="bg-white dark:bg-neutral-950 text-muted-foreground relative z-10 px-2">
+                <span className="bg-white dark:bg-neutral-900 text-muted-foreground relative z-10 px-2">
                   O continua con
                 </span>
               </div>

@@ -6,7 +6,7 @@ import { Label } from "@/components/ui/label"
 import { Link } from "react-router-dom"
 import GoogleIcon from "./icons/google-icon"
 import { UserIcon } from "./icons/user-icon"
-import { useEffect, useRef, useState } from "react"
+import { useRef, useState } from "react"
 import { UserIconHandle } from "./icons/user-icon"
 import { ArrowRightIcon } from "./icons/arrow-right-icon"
 import { ArrowRightIconHandle } from "./icons/arrow-right-icon"
@@ -68,7 +68,7 @@ export function LoginForm({ className, ...props }: React.ComponentProps<"div">) 
                   <button
                     type="button"
                     onClick={() => setIsVisible(!isVisible)}
-                    className="absolute inset-y-0 end-1 top-1 size-fit p-0.5 rounded-md hover:bg-neutral-100 hover:cursor-pointer text-neutral-500"
+                    className="absolute inset-y-0 end-1 top-1 size-fit p-0.5 rounded-md hover:bg-neutral-100 hover:dark:bg-neutral-900 hover:cursor-pointer text-neutral-500"
                   >
                     <motion.div
                       key={isVisible ? "visible" : "hidden"}
@@ -102,7 +102,7 @@ export function LoginForm({ className, ...props }: React.ComponentProps<"div">) 
                 }
               </Button>
               <div className="after:border-border relative text-center text-sm after:absolute after:inset-0 after:top-1/2 after:z-0 after:flex after:items-center after:border-t">
-                <span className="bg-white dark:bg-neutral-950 text-muted-foreground relative z-10 px-2">
+                <span className="bg-white dark:bg-neutral-900 text-muted-foreground relative z-10 px-2">
                   O continua con
                 </span>
               </div>
