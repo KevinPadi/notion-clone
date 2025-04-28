@@ -21,7 +21,7 @@ const Header = () => {
         <div className="mx-auto flex justify-between h-16 max-w-screen-xl items-center gap-8 bg-neutral-200 dark:bg-neutral-900 rounded-xl">
           <a className="block text-teal-600 dark:text-teal-300 pl-2" href="#">
             <span className="sr-only">Home</span>
-            <img src="/notiony-logo.png" className="size-12 rounded-xl" alt="" />
+            <img src="/notiony-logo.png" className="size-12 rounded-xl invert dark:invert-0" alt="" />
           </a>
 
           <div className="flex items-center justify-end md:justify-between">
