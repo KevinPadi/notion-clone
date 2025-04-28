@@ -14,8 +14,8 @@ const HomePage = () => {
       <Header />
 
       <div className="flex flex-col items-center gap-12 mt-10">
-        <h1 className="text-3xl md:text-5xl font-medium text-primary">
-          Editor de Texto estilo Notion
+        <h1 className="text-3xl md:text-5xl font-medium text-primary text-center text-balance">
+          Notiony: editor de texto estilo Notion, minimalista y funcional.
         </h1>
 
         <div className="flex gap-4">
@@ -82,7 +82,7 @@ const HomePage = () => {
           {/* Tiptap Editor Card */}
           <div className="col-span-1 bg-transparent border rounded-3xl flex flex-col items-center justify-between p-4 relative overflow-hidden shadow-xl min-h-[250px] md:min-h-[300px]">
             <p className="text-lg text-balance text-muted-foreground font-medium z-10 mb-4">
-              Editor WYSIWYG con Tiptap
+              Usa imágenes de Unsplash utilizando su API
             </p>
             <div className="relative w-full h-[180px] md:h-[220px] mt-auto">
               <img
@@ -96,7 +96,7 @@ const HomePage = () => {
           {/* Unsplash API Card */}
           <div className="col-span-1 sm:col-span-2 lg:col-span-2 bg-transparent border rounded-3xl flex flex-col items-start p-4 relative overflow-hidden shadow-xl min-h-[250px] md:min-h-[300px]">
             <p className="text-lg text-balance text-muted-foreground font-medium text-left z-10 mb-4">
-              Usa imágenes de Unsplash utilizando su API
+              Editor WYSIWYG con Tiptap
             </p>
             <div className="relative w-full h-[180px] md:h-[220px] mt-auto">
               <img
