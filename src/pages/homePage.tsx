@@ -44,7 +44,9 @@ const HomePage = () => {
           }
         </div>
 
-        <img src="/hero-image.webp" alt="notion" className="w-full rounded-xl border shadow-2xl dark:mask-b-from-60%  dark:mask-b-to-100%" /> 
+        <img src="/hero-light.webp" alt="notion" className="inline-block dark:hidden w-full rounded-xl border shadow-2xl mask-b-from-60%  mask-b-to-100%" />
+
+        <img src="/hero-dark.webp" alt="notion" className="hidden dark:inline-block w-full rounded-xl border shadow-2xl dark:mask-b-from-60%  dark:mask-b-to-100%" /> 
       </div>
 
       <Separator className="max-w-2xl my-10 bg-gradient-to-r from-transparent via-primary to-transparent" />
@@ -60,7 +62,7 @@ const HomePage = () => {
               <img
                 src="/dark-light-mode.webp"
                 alt="Command menu"
-                className="object-contain rounded-xl dark:mask-b-from-10% dark:mask-b-to-50%"
+                className="object-contain rounded-xl mask-b-from-10% mask-b-to-50%"
               />
             </div>
           </div>
@@ -72,9 +74,15 @@ const HomePage = () => {
             </p>
             <div className="relative w-full h-[180px] md:h-[220px] mt-auto">
               <img
-                src="/command-menu.webp"
+                src="/command-light.webp"
                 alt="Dark/Light mode toggle"
-                className="border object-contain rounded-xl dark:mask-r-from-50% dark:mask-r-to-90% dark:mask-b-from-10% dark:mask-b-to-90%"
+                className="border object-contain rounded-xl dark:mask-r-from-50% mask-r-to-120% dark:mask-b-from-40% mask-b-to-100% inline-block dark:hidden"
+              />
+
+              <img
+                src="/command-dark.webp"
+                alt="Dark/Light mode toggle"
+                className="border object-contain rounded-xl dark:mask-r-from-50% mask-r-to-90% dark:mask-b-from-10% mask-b-to-90% dark:inline-block hidden"
               />
             </div>
           </div>
@@ -86,9 +94,15 @@ const HomePage = () => {
             </p>
             <div className="relative w-full h-[180px] md:h-[220px] mt-auto">
               <img
+                src="/unsplash-dialog-light.webp"
+                alt="Tiptap editor"
+                className="object-contain rounded-xl mask-b-from-40% mask-b-to-90% mask-l-from-70% mask-l-to-100% inline-block dark:hidden"
+              />
+
+              <img
                 src="/unsplash-dialog.webp"
                 alt="Tiptap editor"
-                className="object-contain rounded-xl dark:mask-b-from-40% dark:mask-b-to-80% dark:mask-l-from-70% dark:mask-l-to-100%"
+                className="object-contain rounded-xl dark:mask-b-from-40% dark:mask-b-to-90% dark:mask-l-from-70% dark:mask-l-to-100% hidden dark:inline-block"
               />
             </div>
           </div>
@@ -102,7 +116,7 @@ const HomePage = () => {
               <img
                 src="/tiptap-editor-image.webp"
                 alt="Unsplash dialog"
-                className="object-contain rounded-xl dark:mask-b-from-10% dark:mask-b-to-55%"
+                className="object-contain rounded-xl dark:mask-b-from-10% dark:mask-b-to-55% dark:invert-0 invert"
               />
             </div>
           </div>
