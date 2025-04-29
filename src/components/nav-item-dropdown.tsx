@@ -29,6 +29,7 @@ import {
 } from "@/components/ui/dialog"
 import { Input } from "@/components/ui/input"
 import { toast } from "react-toastify"
+import { useNavigate } from "react-router-dom"
 
 type NavItemDropdownTypeProps = {
   favorite: boolean
@@ -44,9 +45,15 @@ const NavItemDropdown = ({favorite, pageId, name}: NavItemDropdownTypeProps ) =>
   const [ openDialog, setOpenDialog ] = useState(false)
   const [ openDropdown, setOpenDropdown ] = useState(false)
   const [isSubmitting, setIsSubmitting] = useState(false)
+  const navigate = useNavigate()
 
   const deleteIconRef = useRef<DeleteIconHandle>(null)
   const penIconRef = useRef<SquarePenIconHandle>(null)
+
+  const handleDeletePage = () => {
+    deletePage(pageId)
+    navigate("/dashboard/home")
+  }
 
   const handleUpdateNamePage = async (name: string) => {
     setIsSubmitting(true)
@@ -103,7 +110,7 @@ const NavItemDropdown = ({favorite, pageId, name}: NavItemDropdownTypeProps ) =>
         <DropdownMenuSeparator />
   
         <DropdownMenuItem
-          onClick={() => deletePage(pageId)}
+          onClick={() => handleDeletePage()}
           className="focus:bg-destructive/10 dark:hover:bg-destructive/10"
           onMouseEnter={() => deleteIconRef.current?.startAnimation()}
           onMouseLeave={() => deleteIconRef.current?.stopAnimation()}
