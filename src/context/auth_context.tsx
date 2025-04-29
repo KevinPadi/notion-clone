@@ -53,6 +53,8 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
         console.error(error.response?.data)
       }
       setUser(null)
+    } finally {
+      setLoading(false)
     }
   }
 

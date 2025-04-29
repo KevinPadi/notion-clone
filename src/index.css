@@ -5,6 +5,7 @@
 @custom-variant dark (&:is(.dark *));
 
 :root {
+  --font-sans: "Geist", "sans-serif";
   --radius: 0.625rem;
   --background: oklch(1 0 0);
   --foreground: oklch(0.145 0 0);
@@ -132,7 +133,7 @@
   max-width: 716px;
   height: 100%;
   margin: auto;
-  font-family: 'Inter', sans-serif;
+  font-family: 'Geist', sans-serif;
   font-size: 16px;
   line-height: 1.6;
   padding: 16px;
