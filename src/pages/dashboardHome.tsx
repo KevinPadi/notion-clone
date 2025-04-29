@@ -24,8 +24,6 @@ const DashboardHome = () => {
   const favoritePages = pages?.filter(page => page.favorite)
   const nonFavoritePages = pages?.filter(page => !page.favorite)
 
-  console.log(favoritePages, nonFavoritePages)
-
   return (
     <div className="p-1 max-w-2xl w-full self-center mt-6 space-y-20">
       <h1 className="text-4xl font-medium text-center">

@@ -115,10 +115,6 @@ export const PageProvider = ({ children }: { children: React.ReactNode }) => {
     setPages([])
   }
 
-  useEffect(() => {
-    getPages()
-  }, [])
-
   return (
     <PagesContext.Provider value={{ pages, loadingPage, getPages, getPageById, createPage, deletePage, updatePage, clearPages }}>
       {children}
