@@ -23,7 +23,7 @@ interface PagesContextType {
   createPage: (pageName: string) => Promise<void>
   deletePage: (pageId: string) => Promise<void>
   updatePage: (pageId: string, updatedData: Partial<Page>) => Promise<void>
-  // clearTasks: () => void
+  clearPages: () => void
 }
 
 const PagesContext = createContext<PagesContextType | undefined>(undefined)
@@ -111,16 +111,16 @@ export const PageProvider = ({ children }: { children: React.ReactNode }) => {
     }
   }
 
-  // const clearTasks = () => {
-  //   setTasks([])
-  // }
+  const clearPages = () => {
+    setPages([])
+  }
 
   useEffect(() => {
     getPages()
   }, [])
 
   return (
-    <PagesContext.Provider value={{ pages, loadingPage, getPages, getPageById, createPage, deletePage, updatePage }}>
+    <PagesContext.Provider value={{ pages, loadingPage, getPages, getPageById, createPage, deletePage, updatePage, clearPages }}>
       {children}
     </PagesContext.Provider>
   )

@@ -18,15 +18,22 @@ import { useTheme } from "./theme-provider"
 import { Link } from "react-router-dom"
 import { ChevronsUpDownIcon, ChevronsUpDownIconHandle } from "./icons/chevrons-up-down"
 import { UserIcon, UserIconHandle } from "./icons/user-icon"
+import { usePagesContext } from "@/context/pages_context"
 
 export function NavUser() {
   const { isMobile } = useSidebar()
   const { theme, setTheme } = useTheme()
   const { user, logout } = useAuth()
+  const { clearPages } = usePagesContext()
 
   const logoutIconRef = useRef<LogoutIconHandle>(null)
   const chevronsIconRef = useRef<ChevronsUpDownIconHandle>(null)
   const userIconRef = useRef<UserIconHandle>(null)
+
+  const handleLogout = () => {
+    logout()
+    clearPages()
+  }
 
   return (
     <SidebarMenu>
@@ -118,7 +125,7 @@ export function NavUser() {
             </DropdownMenuGroup>
             <DropdownMenuSeparator />
             <DropdownMenuItem
-              onClick={logout}
+              onClick={() => handleLogout()}
               className="hover:cursor-pointer"
               onMouseEnter={() => logoutIconRef.current?.startAnimation()}
               onMouseLeave={() => logoutIconRef.current?.stopAnimation()}
