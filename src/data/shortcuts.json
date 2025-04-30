@@ -1,0 +1,160 @@
+[
+  {
+    "section": "Barra lateral",
+    "commands": [
+      {
+        "description": "Abrir/Cerrar barra lateral",
+        "keys": [
+          "Ctrl S"
+        ]
+      }
+    ]
+  },
+  {
+    "section": "Editor",
+    "commands": [
+      {
+        "description": "Copiar",
+        "keys": [
+          "Ctrl C"
+        ]
+      },
+      {
+        "description": "Cortar",
+        "keys": [
+          "Ctrl X"
+        ]
+      },
+      {
+        "description": "Pegar",
+        "keys": [
+          "Ctrl V"
+        ]
+      },
+      {
+        "description": "Pegar sin formato",
+        "keys": [
+          "Ctrl Shift V"
+        ]
+      },
+      {
+        "description": "Deshacer",
+        "keys": [
+          "Ctrl Z"
+        ]
+      },
+      {
+        "description": "Rehacer",
+        "keys": [
+          "Ctrl Shift Z"
+        ]
+      },
+      {
+        "description": "Agregar salto de línea",
+        "keys": [
+          "Shift Enter"
+        ]
+      }
+    ]
+  },
+  {
+    "section": "Formato de texto",
+    "commands": [
+      {
+        "description": "Negrita",
+        "keys": [
+          "Ctrl B"
+        ]
+      },
+      {
+        "description": "Cursiva",
+        "keys": [
+          "Ctrl I"
+        ]
+      },
+      {
+        "description": "Subrayado",
+        "keys": [
+          "Ctrl U"
+        ]
+      },
+      {
+        "description": "Tachado",
+        "keys": [
+          "Ctrl Shift S"
+        ]
+      },
+      {
+        "description": "Resaltado",
+        "keys": [
+          "Ctrl Shift H"
+        ]
+      },
+      {
+        "description": "Código",
+        "keys": [
+          "Ctrl E"
+        ]
+      }
+    ]
+  },
+  {
+    "section": "Formato de párrafo",
+    "commands": [
+      {
+        "description": "Lista ordenada",
+        "keys": [
+          "Ctrl Shift 7"
+        ]
+      },
+      {
+        "description": "Lista con viñetas",
+        "keys": [
+          "Ctrl Shift 8"
+        ]
+      },
+      {
+        "description": "Lista de tareas",
+        "keys": [
+          "Ctrl Shift 9"
+        ]
+      },
+      {
+        "description": "Cita",
+        "keys": [
+          "Ctrl Shift B"
+        ]
+      },
+      {
+        "description": "Alinear a la izquierda",
+        "keys": [
+          "Ctrl Shift L"
+        ]
+      },
+      {
+        "description": "Alinear al centro",
+        "keys": [
+          "Ctrl Shift E"
+        ]
+      },
+      {
+        "description": "Alinear a la derecha",
+        "keys": [
+          "Ctrl Shift R"
+        ]
+      },
+      {
+        "description": "Justificar",
+        "keys": [
+          "Ctrl Shift J"
+        ]
+      },
+      {
+        "description": "Bloque de código",
+        "keys": [
+          "Ctrl Alt C"
+        ]
+      }
+    ]
+  }
+]

@@ -1,0 +1,16 @@
+import { LoginForm } from '@/components/login-form'
+import { useRedirectIfAuth } from '@/hooks/useRedirectIfAuth'
+
+const LoginPage = () => {
+  useRedirectIfAuth()
+  
+  return (
+    <div className="flex min-h-svh flex-col items-center justify-center dark:bg-neutral-900 p-2 md:p-10">
+      <div className="w-full max-w-sm md:max-w-3xl">
+        <LoginForm />
+      </div>
+    </div>
+  )
+}
+
+export default LoginPage
