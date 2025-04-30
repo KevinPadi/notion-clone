@@ -1,4 +1,4 @@
-import { createContext, useContext, useState, useEffect } from "react"
+import { createContext, useContext, useState } from "react"
 import axios from "axios"
 import { toast } from "react-toastify"
 import { useNavigate } from "react-router-dom"
@@ -23,7 +23,7 @@ interface PagesContextType {
   createPage: (pageName: string) => Promise<void>
   deletePage: (pageId: string) => Promise<void>
   updatePage: (pageId: string, updatedData: Partial<Page>) => Promise<void>
-  // clearTasks: () => void
+  clearPages: () => void
 }
 
 const PagesContext = createContext<PagesContextType | undefined>(undefined)
@@ -111,16 +111,12 @@ export const PageProvider = ({ children }: { children: React.ReactNode }) => {
     }
   }
 
-  // const clearTasks = () => {
-  //   setTasks([])
-  // }
-
-  useEffect(() => {
-    getPages()
-  }, [])
+  const clearPages = () => {
+    setPages([])
+  }
 
   return (
-    <PagesContext.Provider value={{ pages, loadingPage, getPages, getPageById, createPage, deletePage, updatePage }}>
+    <PagesContext.Provider value={{ pages, loadingPage, getPages, getPageById, createPage, deletePage, updatePage, clearPages }}>
       {children}
     </PagesContext.Provider>
   )

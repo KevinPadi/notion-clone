@@ -25,12 +25,19 @@ import {
 } from "@/components/ui/alert-dialog"
 import { updateUserSchema, UpdateUserSchema } from "@/schemas/auth_schema"
 import { useState } from "react"
+import { usePagesContext } from "@/context/pages_context"
 
 const DashboardAccount = () => {
 
   const { user, editUser, deleteUser } = useAuth()
   const [ avatar, setAvatar ] = useState(user?.avatar)
   const [ loading, setLoading ] = useState(false)
+  const { clearPages } = usePagesContext()
+
+  const handleDeleteAccount = () => {
+    deleteUser()
+    clearPages()
+  }
 
   const { register, handleSubmit, formState: { errors, isDirty, isSubmitting } } = useForm({
     resolver: zodResolver(updateUserSchema),
@@ -166,7 +173,10 @@ const DashboardAccount = () => {
               </AlertDialogHeader>
               <AlertDialogFooter>
                 <AlertDialogCancel>Cancelar</AlertDialogCancel>
-                <AlertDialogAction onClick={deleteUser}>Eliminar</AlertDialogAction>
+                <AlertDialogAction 
+                  onClick={() => handleDeleteAccount()}>
+                  Eliminar
+                </AlertDialogAction>
               </AlertDialogFooter>
             </AlertDialogContent>
           </AlertDialog>

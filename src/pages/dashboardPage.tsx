@@ -9,8 +9,20 @@ import DashboardHome from "./dashboardHome"
 import DashboardAccount from "./dashboardAccount"
 import EditorPage from "./editorPage"
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip"
+import { usePagesContext } from "@/context/pages_context"
+import { useEffect } from "react"
 
 export default function DashboardPage() {
+
+  const { pages, getPages } = usePagesContext()
+
+  // Cargar las páginas al iniciar la aplicación
+  useEffect(() => {
+    if (pages.length === 0) {
+      getPages()
+    }
+  }, [])
+
   return (
     <SidebarProvider>
       <AppSidebar />
