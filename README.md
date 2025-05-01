@@ -1,54 +1,31 @@
-# React + TypeScript + Vite
+# 📗 Notiony
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+![Screenshot](/public/notiony-mockup.png)
 
-Currently, two official plugins are available:
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## ✨ Características
 
-## Expanding the ESLint configuration
+- Editor enriquecido con Tiptap (párrafos, títulos, listas, citas, tareas, código, etc.).
+- Soporte para formato de texto (negrita, cursiva, subrayado, alineación...).
+- Páginas múltiples con cover desde Unsplash y emoji personalizable.
+- Menú de comandos al estilo Notion.
+- Responsive y con diseño limpio
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+## 🚀 Tecnologías
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+- **Frontend:** React + TypeScript + TailwindCSS + Shadcn + Tiptap  
+- **Backend:** Node.js + Express + MongoDB (Mongoose)  
+- **Auth:** JWT + cookies seguras  
+- **Deploy:** Vercel (frontend), Render (backend)
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+## 📷 Capturas
 
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
-```
+- Landing page  
+- Dashboard con una página abierta  
+- Menú de comandos  
+
+## 💬 Feedback
+
+¿Tenés sugerencias o encontraste un error?  
+[Dejá tu comentario acá.](https://github.com/kevinpadi/notion-clone/issues/new?title=Feedback&body=Escribe+tu+comentario+aqu%C3%AD)
